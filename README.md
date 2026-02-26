@@ -7,7 +7,7 @@ Turning visionary ideas into enduring business legacies.
 
 ## 🚀 Overview
 
-Spur Wiz is a strategy-to-execution company built to close the **Execution Gap** — the space between brilliant ideas and real-world results.
+Spur Wiz is a strategy-to-execution company built to close the **Execution Gap** , the space between brilliant ideas and real-world results.
 
 Most consultants sell advice.
 
@@ -46,7 +46,7 @@ Our execution framework integrates three core pillars:
 - **Brand**
 - **Culture**
 
-The goal is long-term sustainability — not short-term hype.
+The goal is long-term sustainability , not short-term hype.
 
 ---
 
@@ -107,7 +107,7 @@ Unlike traditional consulting firms:
 | Departmental silos | Integrated execution framework |
 | Billable hours | Outcome-driven model |
 
-We are building beyond consulting — toward platform-based execution infrastructure.
+We are building beyond consulting , toward platform-based execution infrastructure.
 
 ---
 
@@ -133,4 +133,4 @@ Website: (Coming Soon)
 
 ## ⚖️ License
 
-Proprietary — All Rights Reserved.
+Proprietary , All Rights Reserved.
