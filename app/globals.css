@@ -90,7 +90,7 @@
   --color-muted: var(--muted-text);
 
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-urbanist: var(--font-urbanist);
 }
 
 /* ===============================
@@ -154,4 +154,8 @@ body {
 /* Gold Highlight Text */
 .text-accent {
   color: var(--accent-500);
+}
+
+.work-with-us-btn {
+  font-family: var(--font-urbanist);
 }
