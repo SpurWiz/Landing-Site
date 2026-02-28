@@ -29,9 +29,9 @@ const Header = () => {
             </Link>
           </div>
           <div
-            className={`nav-links_buttons absolute md:static px-6 md:px-0 flex md:flex-row flex-col items-center justify-center md:justify-between space-y-30 md:space-y-0 md:col-span-2 w-full bg-[#F9F9F9] left-0 top-full h-[90vh] -z-50 md:h-fit md:opacity-100 md:translate-y-0 transition-all duration-300 ease-in-out ${navOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
+            className={`nav-links_buttons absolute md:static px-6 md:px-0 flex md:flex-row flex-col items-center justify-center md:justify-between space-y-30 md:space-y-0 md:col-span-2 w-full bg-[#F9F9F9] left-0 top-full h-[90vh] -z-50 md:z-0 md:h-fit md:opacity-100 md:translate-y-0 transition-all duration-300 ease-in-out ${navOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
           >
-            <ul className="nav-links flex md:flex-row flex-col items-center justify-center gap-4 md:flex-1">
+            <ul className="nav-links flex md:flex-row flex-col items-center justify-center space-y-10 md:space-y-0 md:space-x-8 md:flex-1">
               {navLinks.map((link) => {
                 return (
                   <Link
@@ -44,7 +44,7 @@ const Header = () => {
                 );
               })}
             </ul>
-            <div className="work-with-us-btn md:flex-1 flex flex-col space-y-5 justify-end w-full md:w-fit">
+            <div className="work-with-us-btn md:flex-1 flex flex-col md:flex-row space-y-3 md:space-y-0 md:items-center justify-end w-full md:w-fit">
               <Link
                 href="/"
                 className="capitalize md:py-2.5 md:px-3.5 py-4.5 px-6.5 text-[15px] leading-4 tracking-[-2%] font-bold flex gap-1 items-center justify-center md:w-fit w-full border rounded-[40px] md:border-[#FDB62F] md:text-[#FDB62F] bg-[#103FD5] text-white md:bg-transparent"
