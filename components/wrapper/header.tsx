@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { navLinks } from "@/lib/Nav-links";
 import { GoArrowUpRight } from "react-icons/go";
@@ -10,6 +11,8 @@ import { X } from "lucide-react";
 
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const pathName = usePathname();
+  console.log(pathName);
   function handleNav() {
     setNavOpen((cur) => !cur);
   }
@@ -37,7 +40,7 @@ const Header = () => {
                   <Link
                     key={link.id}
                     href={link.href}
-                    className="capitalize font-normal leading-4 tracking-[-2%]"
+                    className={`capitalize font-normal leading-4 tracking-[-2%] pb-0.5 hover:text-[#FDB62F] hover:border-b-2 hover:border-b-[#FDB62F] transition-all duration-300 ease-in-out ${pathName === link.href ? "text-[#FDB62F] border-b-2 border-b-[#FDB62F]" : ""}`}
                   >
                     {link.name}
                   </Link>
