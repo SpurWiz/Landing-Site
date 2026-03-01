@@ -12,7 +12,7 @@ import { X } from "lucide-react";
 const Header = () => {
   const [navOpen, setNavOpen] = useState(false);
   const pathName = usePathname();
-  console.log(pathName);
+  // console.log(pathName);
   function handleNav() {
     setNavOpen((cur) => !cur);
   }
@@ -40,7 +40,7 @@ const Header = () => {
                   <Link
                     key={link.id}
                     href={link.href}
-                    className={`capitalize font-normal leading-4 tracking-[-2%] pb-0.5 hover:text-[#FDB62F] hover:border-b-2 hover:border-b-[#FDB62F] transition-all duration-300 ease-in-out ${pathName === link.href ? "text-[#FDB62F] border-b-2 border-b-[#FDB62F]" : ""}`}
+                    className={`capitalize font-normal leading-4 tracking-[-2%] pb-0.5 hover:text-[var(--accent-500)] hover:border-b-2 hover:border-b-[var(--accent-500)] transition-all duration-300 ease-in-out ${pathName === link.href ? "text-accent border-b-2 border-b-[var(--accent-500)]" : ""}`}
                   >
                     {link.name}
                   </Link>
@@ -50,7 +50,7 @@ const Header = () => {
             <div className="work-with-us-btn md:flex-1 flex flex-col md:flex-row space-y-3 md:space-y-0 md:items-center justify-end w-full md:w-fit">
               <Link
                 href="/"
-                className="capitalize md:py-2.5 md:px-3.5 py-4.5 px-6.5 text-[15px] leading-4 tracking-[-2%] font-bold flex gap-1 items-center justify-center md:w-fit w-full border rounded-[40px] md:border-[#FDB62F] md:text-[#FDB62F] bg-[#103FD5] text-white md:bg-transparent"
+                className="capitalize md:py-2.5 md:px-3.5 py-4.5 px-6.5 text-[15px] leading-4 tracking-[-2%] font-bold flex gap-1 items-center justify-center md:w-fit w-full border rounded-[40px] md:border-[var(--accent-500)]] md:text-accent bg-[#103FD5] text-white md:bg-transparent"
               >
                 <span>work with us</span>
                 <span>
@@ -59,7 +59,7 @@ const Header = () => {
               </Link>
               <Link
                 href="/"
-                className="capitalize py-4.5 px-6.5 text-[15px] leading-4 tracking-[-2%] font-bold flex gap-1 items-center justify-center md:w-fit w-full border rounded-[40px] border-[#FDB62F] text-[#FDB62F] md:hidden"
+                className="capitalize py-4.5 px-6.5 text-[15px] leading-4 tracking-[-2%] font-bold flex gap-1 items-center justify-center md:w-fit w-full border rounded-[40px] border-[var(--accent-500)] text-accent md:hidden"
               >
                 <span>
                   <HiSparkles />
