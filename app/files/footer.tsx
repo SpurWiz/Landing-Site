@@ -125,7 +125,7 @@ const Footer = () => {
         {/* ── Bottom bar ── */}
         <div className="mt-12 pt-6 border-t border-[#e5e7eb] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[#9ca3af] text-[12.5px]">
-            © {currentYear} Spur Wiz. All rights reserved. Proprietary — not for redistribution.
+            © {currentYear} Spur Wiz. All rights reserved. Proprietary, not for redistribution.
           </p>
 
           <div className="flex items-center gap-5">

@@ -93,7 +93,7 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-      <div className="max-w-6xl px-4 mx-auto py-10">
+      <div className="mx-auto py-10">
         <WhyUnderperform />
         <IntegratedExpertise />
         <ProductPartners />

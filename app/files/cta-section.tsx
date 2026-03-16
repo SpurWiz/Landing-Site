@@ -8,7 +8,7 @@ const CtaSection = () => {
         {/* Headline with underline accent */}
         <h2
           className="font-extrabold leading-[1.1] tracking-[-0.03em] text-[#0d0d0d] max-w-[700px]"
-          style={{ fontSize: "clamp(2rem, 4vw, 3.25rem)" }}
+          style={{ fontSize: "clamp(1.2rem, 2vw, 2.25rem)" }}
         >
           Your Product Deserves More Than Advice,{" "}
           <span className="relative inline-block">

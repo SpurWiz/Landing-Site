@@ -10,7 +10,7 @@ const audiences = [
     icon: <TbRocket size={20} />,
     title: "Early Stage Builders",
     description:
-      "You have an idea and momentum — but no playbook. We help you build the systems that scale before chaos sets in.",
+      "You have an idea and momentum but no playbook. We help you build the systems that scale before chaos sets in.",
   },
   {
     id: 2,
@@ -58,7 +58,7 @@ const BuiltForFounders = () => {
           </div>
 
           <p className="text-[#6b7280] text-[14.5px] leading-[1.75] max-w-[380px] lg:text-right">
-            Whether you&apos;re launching, stagnating, or scaling — if you&apos;re
+            Whether you&apos;re launching, stagnating, or scaling. If you&apos;re
             serious about turning ambition into a sustainable business, this is
             built for you.
           </p>
@@ -67,7 +67,7 @@ const BuiltForFounders = () => {
         {/* ── Video Thumbnail ── */}
         <div className="relative w-full h-[260px] lg:h-[400px] rounded-2xl overflow-hidden mb-12 group cursor-pointer">
           <Image
-            src="/images/founders-video-thumb.png"
+            src="/images/image6.png"
             alt="Founders working session"
             fill
             sizes="100vw"
@@ -82,7 +82,7 @@ const BuiltForFounders = () => {
             <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-[#fdb62f] flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
               <GoPlay
                 size={28}
-                className="text-white ml-1.5"
+                className="text-white"
               />
             </div>
           </div>

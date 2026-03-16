@@ -20,14 +20,14 @@ const expertiseCards = [
     icon: <TbCrosshair size={22} />,
     title: "Brand & Business Alignment",
     description:
-      "We align your brand identity with your business strategy — ensuring every customer touchpoint reinforces who you are and where you're going.",
+      "We align your brand identity with your business strategy, ensuring every customer touchpoint reinforces who you are and where you're going.",
   },
   {
     id: 3,
     icon: <TbCode size={22} />,
     title: "Product Development & Engineering",
     description:
-      "From MVPs to full product overhauls, we build, ship, and iterate with speed — without sacrificing structure or scalability.",
+      "From MVPs to full product overhauls, we build, ship, and iterate with speed  without sacrificing structure or scalability.",
   },
   {
     id: 4,

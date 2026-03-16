@@ -1,6 +1,9 @@
-import React from "react";
+"use client"
+import React, { useState, useRef } from "react";
 import Image from "next/image";
-import Button from "@/components/ui/Button";
+import Badge from "@/components/ui/Badge";
+import { HiSparkles } from "react-icons/hi";
+import { ArrowUp } from "lucide-react";
 
 /* ── Decorative star SVG ── */
 const Star = ({
@@ -23,9 +26,22 @@ const Star = ({
 );
 
 const LegacyLensSection = () => {
+  const [message, setMessage] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleChange = (e: any) => {
+    setMessage(e.target.value);
+
+    // Auto resize
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+    }
+  };
+
   return (
-    <section className="relative bg-[#060d1f] py-24 lg:py-32 overflow-hidden">
-      {/* ── Star Decorations ── */}
+    <section className="relative bg-[#060d1f] py-8 lg:py-20 overflow-hidden">
+      <img src="/images/skystars.jpg" className="absolute top-0 left-0 w-full object-cover object-top" />
       <Star
         size={18}
         className="absolute top-10 left-[8%] text-[#fdb62f] opacity-80"
@@ -62,23 +78,23 @@ const LegacyLensSection = () => {
       />
 
       {/* ── Content ── */}
-      <div className="relative z-10 container mx-auto px-6 text-center flex flex-col items-center">
+      <div className="relative z-10 container mx-auto px-6 mt-16 text-center flex flex-col items-center">
         {/* Entry label */}
-        <p className="text-white/50 text-[13px] font-medium tracking-widest uppercase mb-4">
+        <p className="text-white/50 text-[16px] font-medium tracking-widest uppercase mb-4">
           The Entry Point
         </p>
 
         {/* Logo-style wordmark */}
         <h2
           className="font-extrabold tracking-[-0.04em] leading-none mb-6"
-          style={{ fontSize: "clamp(3.5rem, 9vw, 7.5rem)" }}
+          style={{ fontSize: "clamp(1.5rem, 4vw, 2.5rem)" }}
         >
           <span className="text-white">LEGACY</span>
           <span className="text-[#fdb62f]">LENS</span>
         </h2>
 
         {/* Description */}
-        <p className="text-white/60 text-[15px] leading-[1.75] max-w-[560px] mb-4">
+        <p className="text-white/60 text-[15px] leading-[1.95] max-w-[560px] mb-6">
           LegacyLens is our AI-powered business auditing platform. It diagnoses
           your operational health, brand consistency, and execution gaps —
           giving you a structured report in minutes, not months.
@@ -88,41 +104,34 @@ const LegacyLensSection = () => {
           Audit your business. See what&apos;s breaking. Fix it with us.
         </p>
 
-        {/* Robot / AI mascot image */}
-        <div className="relative w-[220px] h-[220px] lg:w-[280px] lg:h-[280px] mb-10">
-          <Image
-            src="/images/image4.png"
-            alt="LegacyLens AI"
-            fill
-            sizes="280px"
-            className="object-contain drop-shadow-2xl"
-          />
-        </div>
-
         {/* Interface preview strip */}
-        <div className="w-full max-w-[680px] rounded-2xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm mb-10">
-          <div className="relative w-full h-[160px] lg:h-[200px]">
-            <Image
-              src="/images/legacy-lens-preview.png"
-              alt="LegacyLens dashboard preview"
-              fill
-              sizes="680px"
-              className="object-cover object-top"
+        <div className="w-full max-w-[680px] rounded-2xl mt-36 !h-[200px] border border-white/10 bg-white/5 backdrop-blur-sm p-4">
+
+          <div className="relative flex items-end">
+
+            <textarea
+              ref={textareaRef}
+              rows={1}
+              placeholder="Ask anything..."
+              value={message}
+              onChange={handleChange}
+              className="w-full resize-none  bg-transparent text-white outline-none pr-12 !h-[220px] max-h-[150px]"
             />
-            {/* Gradient fade at bottom */}
-            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#060d1f] to-transparent" />
+
+            {message.trim() !== "" && (
+              <button className="absolute right-0 bottom-0 mb-1 bg-white text-black p-2 rounded-full">
+                <ArrowUp size={18} />
+              </button>
+            )}
+
           </div>
+
         </div>
 
-        {/* CTA */}
-        <Button
-          label="Try Legacy Lens"
-          href="/legacy"
-          variant="outline"
-          size="lg"
-          icon="sparkles"
-          iconPosition="left"
-        />
+        <div className="mt-10">
+          <Badge icon={HiSparkles} label="Try Legacy Lens" />
+        </div>
+
       </div>
     </section>
   );
