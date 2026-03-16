@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/* ===============================
+   ROOT DESIGN TOKENS (LIGHT MODE)
+================================= */
+:root {
+  /* Base */
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* Brand - Blue */
+  --primary-50: #eef2ff;
+  --primary-100: #dce4ff;
+  --primary-200: #b9c9ff;
+  --primary-300: #8ea7ff;
+  --primary-400: #5d7cff;
+  --primary-500: #103fd5; /* MAIN BRAND */
+  --primary-600: #0e37bd;
+  --primary-700: #0c2fa3;
+  --primary-800: #0a278a;
+  --primary-900: #081f70;
+
+  /* Accent - Gold */
+  --accent-50: #fff8e6;
+  --accent-100: #ffedbf;
+  --accent-200: #ffe199;
+  --accent-300: #ffd466;
+  --accent-400: #ffc233;
+  --accent-500: #fdb62f; /* MAIN GOLD */
+  --accent-600: #e6a428;
+  --accent-700: #cc9122;
+  --accent-800: #b37f1c;
+  --accent-900: #996c16;
+
+  /* Neutral Scale */
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+
+  /* UI Semantic */
+  --card-bg: #ffffff;
+  --border-color: #e5e7eb;
+  --input-bg: #ffffff;
+  --muted-text: #6b7280;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+/* ===============================
+   DARK MODE
+================================= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #f9f9f9;
+    --foreground: #ededed;
+
+    --card-bg: #111827;
+    --border-color: #1f2937;
+    --input-bg: #1a2236;
+    --muted-text: #9ca3af;
+  }
+}
+
+/* ===============================
+   TAILWIND INLINE THEME
+================================= */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary-500);
+  --color-primary-foreground: #ffffff;
+
+  --color-accent: var(--accent-500);
+  --color-accent-foreground: #111827;
+
+  --color-card: var(--card-bg);
+  --color-border: var(--border-color);
+  --color-muted: var(--muted-text);
+
+  --font-sans: var(--font-geist-sans);
+  --font-urbanist: var(--font-urbanist);
+}
+
+/* ===============================
+   GLOBAL BASE STYLES
+================================= */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-cerebri), sans-serif;
+  /* font-family: var(--font-sans), Arial, Helvetica, sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===============================
+   COMPONENT UTILITIES
+================================= */
+
+/* Primary Button */
+.btn-primary {
+  background: var(--primary-500);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--primary-600);
+}
+
+/* Accent Button */
+.btn-accent {
+  background: var(--accent-500);
+  color: #111827;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-accent:hover {
+  background: var(--accent-600);
+}
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+/* Section Gradient Background */
+.section-gradient {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-800));
+  color: white;
+}
+
+/* Gold Highlight Text */
+.text-accent {
+  color: var(--accent-500);
+}
+
+.work-with-us-btn {
+  font-family: var(--font-urbanist);
+}
