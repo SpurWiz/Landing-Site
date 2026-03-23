@@ -23,7 +23,7 @@ interface ButtonProps {
 
 const sizeMap: Record<ButtonSize, string> = {
   sm: "py-1 px-2 text-[10px]",
-  md: "py-3 px-6 text-[15px]",
+  md: "py-2.5 px-4.5 text-[14px]",
   lg: "py-4 px-8 text-[16px]",
 };
 

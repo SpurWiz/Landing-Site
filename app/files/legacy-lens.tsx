@@ -41,7 +41,7 @@ const LegacyLensSection = () => {
 
   return (
     <section className="relative bg-[#060d1f] py-8 lg:py-20 overflow-hidden">
-      <img src="/images/skystars.jpg" className="absolute top-0 left-0 w-full object-cover object-top" />
+      <img src="/images/skystars.jpg" className="absolute top-0 left-0 w-full h-full !object-cover object-top" />
       <Star
         size={18}
         className="absolute top-10 left-[8%] text-[#fdb62f] opacity-80"
@@ -94,7 +94,7 @@ const LegacyLensSection = () => {
         </h2>
 
         {/* Description */}
-        <p className="text-white/60 text-[15px] leading-[1.95] max-w-[560px] mb-6">
+        <p className="text-white/60 text-[11px] md:text-[15px] leading-[1.95] max-w-[560px] mb-6">
           LegacyLens is our AI-powered business auditing platform. It diagnoses
           your operational health, brand consistency, and execution gaps —
           giving you a structured report in minutes, not months.
@@ -105,10 +105,8 @@ const LegacyLensSection = () => {
         </p>
 
         {/* Interface preview strip */}
-        <div className="w-full max-w-[680px] rounded-2xl mt-36 !h-[200px] border border-white/10 bg-white/5 backdrop-blur-sm p-4">
-
+        <div className="w-full max-w-[680px] rounded-2xl md:mt-36 !h-[200px] border border-white/10 bg-white/5 backdrop-blur-sm p-4">
           <div className="relative flex items-end">
-
             <textarea
               ref={textareaRef}
               rows={1}

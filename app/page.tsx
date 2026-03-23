@@ -16,8 +16,8 @@ const LandingPage = () => {
 
 
       <section className="relative overflow-hidden bg-[#fff8e6] min-h-[calc(100vh-88px)]">
-        <div className="container mx-auto px-6 h-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center min-h-[calc(100vh-88px)] py-12 lg:py-0">
+        <div className="container mx-auto px-3 md:px-6 h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-center min-h-[calc(100vh-88px)] py-12 lg:py-0">
             <div className="flex flex-col justify-center space-y-6 relative z-10 max-w-[620px]">
               {/* Headline */}
               <h1
@@ -45,7 +45,7 @@ const LandingPage = () => {
                   label="Work With Us"
                   href="/contact"
                   variant="primary"
-                  size="lg"
+                  size="md"
                   icon="arrow"
                   iconPosition="right"
                 />
@@ -53,7 +53,7 @@ const LandingPage = () => {
                   label="Try Legacy Lens"
                   href="/legacy"
                   variant="outline"
-                  size="lg"
+                  size="md"
                   icon="sparkles"
                   iconPosition="left"
                 />

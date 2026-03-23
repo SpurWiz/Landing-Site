@@ -32,7 +32,7 @@ const WhyUnderperform = () => {
               alt="Frustrated founder at desk"
               width={1500}
               height={1500}
-              className="absolute object-cover -top-10 -right-10 w-60 h-60 rounded-xl border-4 border-white shadow-lg"
+              className="absolute object-cover -top-10 md:-right-10 w-40 h-40 md:w-60 md:h-60 rounded-xl border-4 border-white shadow-lg"
             />
           </div>
 

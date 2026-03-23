@@ -40,11 +40,11 @@ const expertiseCards = [
 
 const IntegratedExpertise = () => {
   return (
-    <section className="relative py-24 lg:py-32 px-30 overflow-hidden bg-[#F9F9F9]">
+    <section className="relative py-24 lg:py-56 md:px-30 overflow-hidden bg-[#F9F9F9]">
       {/* ── Blue Blob Background ── */}
       <div
-        className="absolute mx-auto w-11/12 inset-x-[-5%] inset-y-[5%] rounded-xl bg-[#103FD5] pointer-events-none"
-        style={{ transform: "rotate(-2.5deg)" }}
+        className="absolute md:rotate-[-4.5deg] md:mx-auto w-full md:w-11/12 md:inset-x-[-5%] inset-y-[5%] rounded-xl bg-[#103FD5] pointer-events-none"
+        // style={{ transform: "rotate(-4.5deg)" }}
         aria-hidden="true"
       />
 
@@ -59,7 +59,7 @@ const IntegratedExpertise = () => {
           </span>
 
           <h2
-            className="font-extrabold leading-[1.1] tracking-[-0.03em] text-white max-w-[560px]"
+            className="font-extrabold leading-[1.3] tracking-[-0.03em] text-white max-w-[560px]"
             style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)" }}
           >
             Integrated Expertise Across Product, Structure, and Execution
