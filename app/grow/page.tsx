@@ -113,6 +113,7 @@ const Grow = () => {
             width={400}
             height={400}
             className=""
+            
           />
         </div>
        
