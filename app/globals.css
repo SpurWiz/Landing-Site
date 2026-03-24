@@ -159,3 +159,61 @@ body {
 .work-with-us-btn {
   font-family: var(--font-urbanist);
 }
+
+.legacy-hero {
+  height: 120vh;
+  background: url("/logo/starbg.png") center center/ cover;
+  /* position: relative; */
+  overflow: hidden;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.number {
+  background-color: white;
+  color: var(--primary-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 100%;
+  margin-bottom: 30px;
+}
+.step-heading {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0px;
+  font-size: 21px;
+  line-height: 24px;
+  letter-spacing: 0%;
+}
+
+.step-content {
+  color: #9eadc5;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.separator {
+  /* align-self: center; */
+  margin-top: 25px;
+}
+
+@media (max-width: 768px) {
+  .separator {
+    display: none;
+  }
+
+  .step-heading {
+    margin-bottom: 20px;
+  }
+}

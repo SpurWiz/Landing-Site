@@ -17,7 +17,7 @@ const Header = () => {
     setNavOpen((cur) => !cur);
   }
   return (
-    <header className="py-8 sticky top-0 bg-[#F9F9F9]">
+    <header className="py-8 sticky top-0 bg-[#F9F9F9] z-100">
       <div className="container mx-auto px-6">
         <nav className="md:grid md:grid-cols-3 flex justify-between items-center">
           <div className="logo md:col-span-1">
