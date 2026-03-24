@@ -14,30 +14,30 @@ const LegacyLense = () => {
             <div className="hero-container flex flex-col items-center justify-center h-screen">
               <div className="circles hidden md:block">
                 <div className="smaller-circle absolute -top-20 left-1/2 -translate-x-1/2">
-                  <img src="/logo/smaller-circle.png" alt="" />
+                  <img src="/images/smaller-circle.png" alt="" />
                 </div>
                 <div className="bigger-circle absolute top-0 left-1/2 -translate-x-1/2">
-                  <img src="/logo/big-circle.png" alt="" />
+                  <img src="/images/big-circle.png" alt="" />
                 </div>
               </div>
               <div className="stars">
                 <img
-                  src="/logo/Star-2.png"
+                  src="/images/Star-2.png"
                   alt=""
                   className="absolute right-30 top-50 size-10"
                 />
                 <img
-                  src="/logo/Star-3.png"
+                  src="/images/Star-3.png"
                   alt=""
                   className="absolute left-70 size-12 "
                 />
                 <img
-                  src="/logo/Star-5.png"
+                  src="/images/Star-5.png"
                   alt=""
                   className="absolute left-20 bottom-30 size-14"
                 />
                 <img
-                  src="/logo/Star-5.png"
+                  src="/images/Star-5.png"
                   alt=""
                   className="absolute right-60 top-30 size-14"
                 />
@@ -45,7 +45,7 @@ const LegacyLense = () => {
               <div className="try-btn text-white z-10">
                 <button className="bg-[#05204B] flex gap-x-3 px-8.5 py-2 rounded-[60px] capitalize leading-6 font-medium cursor-pointer">
                   <span>
-                    <img src="/logo/handshake.png" alt="handshake Icon" />
+                    <img src="/images/handshake.png" alt="handshake Icon" />
                   </span>
                   <span>legacy lens</span>
                 </button>
@@ -63,7 +63,7 @@ const LegacyLense = () => {
               </div>
               <div className="input-wrapper relative w-full flex items-center justify-center">
                 <div className="photoboom-bg absolute bottom-14 left-1/2 -translate-x-1/2">
-                  <img src="/logo/image-Photoroom.png" alt="" />
+                  <img src="/images/image-Photoroom.png" alt="" />
                 </div>
                 {/* <div className="relative rounded-[20px] mb-3">
                   <div className="absolute -inset-0.5 rounded-[20px] bg-linear-to-r from-[#CAA181] via-[#DB5927] to-[#125ACA]" />
@@ -101,7 +101,7 @@ const LegacyLense = () => {
               <div className="image-side flex-1">
                 <div className="image-container relative h-100 md:w-157.5 w-full">
                   <Image
-                    src="/logo/image-Photoroom-1.png"
+                    src="/images/image-Photoroom-1.png"
                     alt="Image Photoroom"
                     fill
                     className="object-cover"
@@ -153,7 +153,7 @@ const LegacyLense = () => {
                 </p>
               </div>
               <div className="separator">
-                <img src="logo/arrow1.png" alt="" />
+                <img src="images/arrow1.png" alt="" />
               </div>
               <div className="step md:mt-25 ">
                 <div className="number">2</div>
@@ -164,7 +164,7 @@ const LegacyLense = () => {
                 </p>
               </div>
               <div className="separator">
-                <img src="logo/arrow2.png" alt="" />
+                <img src="images/arrow2.png" alt="" />
               </div>
               <div className="step">
                 <div className="number">3</div>
@@ -175,7 +175,7 @@ const LegacyLense = () => {
                 </p>
               </div>
               <div className="separator">
-                <img src="logo/arrow3.png" alt="" />
+                <img src="images/arrow3.png" alt="" />
               </div>
               <div className="step md:mt-25">
                 <div className="number">4</div>
@@ -188,12 +188,12 @@ const LegacyLense = () => {
             </div>
             <div className="blurs">
               <img
-                src="/logo/blur.png"
+                src="/images/blur.png"
                 alt=""
                 className="absolute md:top-0 md:right-0 w-106 h-106 top-70 -right-40"
               />
               <img
-                src="/logo/blur2.png"
+                src="/images/blur2.png"
                 alt=""
                 className="absolute md:bottom-10 bottom-0 -left-30 w-86 h-86"
               />

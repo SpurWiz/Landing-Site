@@ -126,7 +126,12 @@ Security and confidentiality are foundational.
 
 For partnerships or inquiries:
 
+<<<<<<< HEAD
 Email: hello@spurwiz.com  
+=======
+Email: hello@spurwiz.comx
+Development: https://spurwiz.vercel.app
+>>>>>>> origin/master
 Website: (Coming Soon)
 
 ---

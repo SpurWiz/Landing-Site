@@ -69,7 +69,7 @@ const Header = () => {
             </div>
           </div>
           <div className="hamburger md:hidden">
-            <button onClick={handleNav}>
+            <button onClick={handleNav} className="text-gray-700">
               {navOpen ? <X /> : <HiMenuAlt3 size={24} />}
             </button>
           </div>
