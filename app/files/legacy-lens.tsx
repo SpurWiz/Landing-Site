@@ -4,6 +4,7 @@ import Image from "next/image";
 import Badge from "@/components/ui/Badge";
 import { HiSparkles } from "react-icons/hi";
 import { ArrowUp } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 /* ── Decorative star SVG ── */
 const Star = ({
@@ -28,6 +29,7 @@ const Star = ({
 const LegacyLensSection = () => {
   const [message, setMessage] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const router = useRouter();
 
   const handleChange = (e: any) => {
     setMessage(e.target.value);
@@ -117,7 +119,7 @@ const LegacyLensSection = () => {
             />
 
             {message.trim() !== "" && (
-              <button className="absolute right-0 bottom-0 mb-1 bg-white text-black p-2 rounded-full">
+              <button onClick={() => router.push(`/legacy/chat?message=${message}`)} className="absolute right-0 bottom-0 mb-1 bg-white text-black p-2 rounded-full">
                 <ArrowUp size={18} />
               </button>
             )}

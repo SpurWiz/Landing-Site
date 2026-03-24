@@ -85,8 +85,8 @@ const LandingPage = () => {
                   alt="Business execution specialist"
                   fill
                   priority
-                  sizes="(max-width: 1024px) 100vw, 80vw"
-                  className="object-contain object-bottom"
+                  // sizes="(max-width: 1024px) 100vw, 100vw"
+                  className="object-cover object-start !w-[500px]"
                 />
               </div>
             </div>
