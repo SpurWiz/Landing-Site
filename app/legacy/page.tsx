@@ -4,6 +4,34 @@ import { IoIosArrowRoundUp } from "react-icons/io";
 import Button from "@/components/button";
 import Image from "next/image";
 import ParticleBackground from "@/components/particlebg";
+import TestimonialCarousel from "../files/testimonial-carousel";
+
+const whatYouLeaveWith = [
+  {
+    id: 1,
+    title: "Structural Health Assessment",
+    description:
+      "A detailed evaluation of your internal workflows, team alignment, operational systems, and administrative structure  identifying inefficiencies, bottlenecks, and execution gaps.",
+  },
+  {
+    id: 2,
+    title: "Brand & Positioning Clarity Report",
+    description:
+      "An analysis of how your messaging, identity, and customer journey align with your product’s true value including misalignments that weaken perception or conversion.",
+  },
+  {
+    id: 3,
+    title: "Technical Readiness Evaluation",
+    description:
+      "A review of your platform’s architecture, user experience flow, scalability potential, and performance risks highlighting areas that require rebuilding before scaling.",
+  },
+  {
+    id: 4,
+    title: "Prioritized Execution Roadmap",
+    description:
+      "A phased, structured implementation plan outlining what must be addressed first, what can be optimized later, and what should be eliminated entirely.",
+  },
+];
 
 const LegacyLense = () => {
   return (
@@ -131,10 +159,10 @@ const LegacyLense = () => {
             </div>
           </div>
         </section>
-        <section className="hot-it-works relative bg-[#103FD5] py-20">
+        <section className="hot-it-works relative bg-[#103FD5] py-20 overflow-hidden">
           <div className="container px-6 mx-auto">
             <div className="heading flex flex-col items-center">
-              <h2 className="text-[32px] md:text-[52px] text-white mb-4">
+              <h2 className="text-[32px] md:text-[52px] text-white mb-4 leading-11 md:leading-0">
                 How Legacy Lens Works
               </h2>
               <p className="text-[13px] md:text-[15px] leading-6 text-[#899DBD] max-w-173.75 text-center">
@@ -200,8 +228,67 @@ const LegacyLense = () => {
             </div>
           </div>
         </section>
-        <section className="what-do-you-leave-with">
-          <div className="container mx-auto px-6"></div>
+        <section className="what-do-you-leave-with py-20">
+          <div className="container mx-auto px-6">
+            <div className="section-content flex flex-col md:flex-row">
+              <div className="write-up-side flex-1">
+                <Button text="Legacy lens outcome" isBlue={false} />
+                <h2 className="heading capitalize font-bold text-[32px] md:text-[52px] leading-17.75 -tracking-[1%]">
+                  What you leave with
+                </h2>
+                <p className="font-medium text-[13px] md:text-[15px] leading-6 tracking-[0%] text-[#6B6B6B]">
+                  After completing Legacy Lens, you don’t walk away with
+                  abstract recommendations.You receive a structured breakdown of
+                  what’s working, what’s misaligned, and what’s limiting scale
+                  along with a clear path forward.
+                </p>
+                <p className="font-medium text-[15px] leading-6 tracking-[0%] text-[#6B6B6B] mt-6">
+                  Everything is prioritized. Everything is actionable. The
+                  Deliverables are:
+                </p>
+                <div className="deliverable py-10 flex flex-col space-y-10">
+                  {whatYouLeaveWith.map((item) => {
+                    return (
+                      <div className="peak" key={item.id}>
+                        <h3 className="font-bold text-[20px] leading-6 tracking-[0%] mb-3">
+                          {item.title}
+                        </h3>
+                        <p className="font-medium text-[15px] leading-6 tracking-[0%] text-[#6B6B6B]">
+                          {item.description}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="image-side flex-1">
+                <div className="image-container relative h-210.5">
+                  <Image
+                    src="/images/what-you.png"
+                    alt="what leave with image"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="testimonials bg-[#103FD5]">
+          <div className="container mx-auto px-6">
+            <div className="section-container flex flex-col items-center py-20">
+              <Button text="Testimonials" isBlue={true} />
+              <h2 className="text-[32px] md:text-[42px] text-white w-full md:w-2xl text-center leading-13.75 -tracking-[1%]">
+                What Founders Say After Working With Us
+              </h2>
+              <p className="font-medium text-[15px] leading-6 traking-[0%] w-full md:w-197.5 text-center text-[#899DBD] mt-6">
+                Execution changes everything. These are founders and business
+                leaders who partnered with Spur Wiz to restructure, rebuild, and
+                scale their products and saw measurable transformation.
+              </p>
+              <TestimonialCarousel />
+            </div>
+          </div>
         </section>
       </main>
     </Wrapper>
