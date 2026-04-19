@@ -96,7 +96,7 @@ const LegacyLense = () => {
                     />
 
                     <Link
-                      href="/legacy/chat"
+                      href="/"
                       className="flex items-center justify-center sm:self-end bg-[#05204B] px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-[60px] capitalize text-white font-extralight border border-[#fdb62f] cursor-pointer hover:bg-[#081f70] transition-colors text-sm sm:text-base"
                     >
                       <IoIosArrowRoundUp size={20} className="md:size-6" />

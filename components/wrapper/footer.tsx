@@ -25,7 +25,7 @@ const socialLinks = [
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/legacy", label: "LegacyLens" },
+  { href: "/legacylens", label: "LegacyLens" },
   { href: "/services", label: "Services" },
   { href: "/grow", label: "Grow" },
   { href: "/career", label: "Careers" },

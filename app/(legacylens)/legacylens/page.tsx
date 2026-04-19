@@ -121,26 +121,26 @@ export default function LegacyPage({ params }: { params: { message?: string } })
   };
 
   return (
-    <Wrapper noFooter noOverflow>
+    <div className="h-screen overflow-hidden">
       <div className="overflow-hidden fixed w-full h-full inset-0 z-0 top-0 left-0">
-          <Image
-            src="/images/stars.png"
-            alt=""
-            fill
-            className="object-cover object-top fixed w-full h-full inset-0 z-0 top-0 left-0"
-            priority
-            aria-hidden
-          />
-        </div>
+        <Image
+          src="/images/stars.png"
+          alt=""
+          fill
+          className="object-cover object-top fixed w-full h-full inset-0 z-0 top-0 left-0"
+          priority
+          aria-hidden
+        />
+      </div>
       <section className="relative w-full ">
-        <div className="absolute inset-0 z-[1] w-full h-full top-0 left-0 bg-[#060d1f]/55 pointer-events-none" />
+        <div className="absolute inset-0 z-[1] w-full h-screen top-0 left-0 bg-[#060d1f]/55 pointer-events-none" />
         <div
           className="absolute inset-0 z-[2] pointer-events-none"
         />
         <div
           className="absolute top-0 left-0 right-0 h-28 z-[3] pointer-events-none"
           style={{
-            background:""
+            background: ""
           }}
         />
         <div
@@ -157,8 +157,8 @@ export default function LegacyPage({ params }: { params: { message?: string } })
               "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(6,13,31,0.55) 100%)",
           }}
         />
-        
-        <div className="relative z-10 flex flex-col items-center justify-start pt-16 pb-16 px-4 min-h-[calc(100vh-88px)]">
+
+        <div className="relative z-10 flex flex-col items-center justify-start pt-16 pb-16 px-4 min-h-full">
 
           {/* Label + title */}
           <p className="text-white/45 text-[12px] font-semibold tracking-[0.2em] uppercase mb-1">
@@ -267,6 +267,6 @@ export default function LegacyPage({ params }: { params: { message?: string } })
           </div>
         </div>
       </section>
-    </Wrapper>
+    </div>
   );
 }
