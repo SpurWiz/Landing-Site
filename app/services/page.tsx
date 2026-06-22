@@ -197,7 +197,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
     {/* Price + CTA */}
     <div className="flex items-center justify-between pt-5 border-t border-[#e5e7eb]">
-      <div>
+      <div className="hidden">
         <p className="font-extrabold text-[16px] text-[#111827]">{service.price}</p>
         <p className="text-[11px] text-[#9ca3af]">{service.priceNote}</p>
       </div>

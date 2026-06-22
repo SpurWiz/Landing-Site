@@ -113,11 +113,11 @@ const Footer = () => {
               contact@spurwiz.com
             </Link>
             <Link
-              href="tel:+2348012345678"
+              href="tel:+2349040460390"
               className="flex items-center gap-2.5 text-[#6b7280] text-[13.5px] hover:text-[#103FD5] transition-colors"
             >
               <TbPhone size={14} className="text-[#fdb62f] flex-shrink-0" />
-              +234 801 234 5678
+              +234 904 046 0390
             </Link>
             <div className="flex items-start gap-2.5 text-[#6b7280] text-[13.5px]">
               <TbMapPin size={14} className="text-[#fdb62f] flex-shrink-0 mt-0.5" />

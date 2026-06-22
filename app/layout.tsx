@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "Spur Wiz",
     images: [
       {
-        url: "/logo/logo.png",
+        url: "/logo/icon.png",
         width: 1200,
         height: 630,
         alt: "Spur Wiz - Legacy-as-a-Service",
