@@ -130,7 +130,7 @@ export default function DashboardPage() {
               across your portfolio that need attention.
             </p>
           </div>
-          <Link href="/dashboard/projects/create">
+          <Link href="/dashboard/projects/new">
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}

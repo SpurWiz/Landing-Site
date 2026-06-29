@@ -1,5 +1,6 @@
 "use client";
 
+import PatternBg from "@/components/ui/patternBg";
 import { motion } from "framer-motion";
 import { LucideIcon, TrendingUp, TrendingDown, Minus } from "lucide-react";
 
@@ -41,6 +42,7 @@ export default function StatCard({
       className="relative rounded-2xl overflow-hidden border border-white/60 bg-white"
       style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}
     >
+      <PatternBg pattern={'wave'} color={'#103fd5'} />
       {/* Gradient strip at top */}
       <div className="h-1 w-full" style={{ background: gradient }} />
 

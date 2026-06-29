@@ -19,8 +19,8 @@ export default function ProjectSwitcher() {
   }, []);
 
   return (
-    <div className="relative" ref={ref}>
-      <button
+    <div className="relative !z-50 float-right" ref={ref}>
+      <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
         onClick={() => setOpen((o) => !o)}
         className="flex items-center gap-2.5 pl-3 pr-2.5 py-2 rounded-xl border border-[#e5e7eb] bg-white hover:border-[#d1d5db] transition-colors group"
       >
@@ -34,9 +34,9 @@ export default function ProjectSwitcher() {
           <p className="text-[12px] font-semibold text-[#111827] leading-none truncate max-w-[140px]">
             {activeProject.businessName}
           </p>
-          <p className="text-[10.5px] text-[#9ca3af] mt-0.5 truncate max-w-[140px]">
+          {/* <p className="text-[10.5px] text-[#9ca3af] mt-0.5 truncate max-w-[140px]">
             {activeProject.name}
-          </p>
+          </p> */}
         </div>
 
         <motion.div
@@ -45,7 +45,7 @@ export default function ProjectSwitcher() {
         >
           <ChevronDown size={13} className="text-[#9ca3af]" />
         </motion.div>
-      </button>
+      </motion.button>
 
       <AnimatePresence>
         {open && (
@@ -54,9 +54,10 @@ export default function ProjectSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute top-full left-0 mt-2 w-[280px] bg-white border border-[#e5e7eb] rounded-2xl shadow-xl z-50 overflow-hidden"
+            className="absolute z-50 top-full -left-40 mt-2 w-[280px] bg-white border border-[#e5e7eb] rounded-2xl shadow-xl z-50 overflow-hidden"
             style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}
           >
+           
             <div className="px-3 pt-3 pb-2 border-b border-[#f3f4f6]">
               <p className="text-[10.5px] font-semibold text-[#9ca3af] uppercase tracking-widest">
                 Switch project
@@ -113,7 +114,7 @@ export default function ProjectSwitcher() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
-    </div>
+    </AnimatePresence>
+    </div >
   );
 }
