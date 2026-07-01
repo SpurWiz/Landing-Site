@@ -24,12 +24,12 @@ import {
   ShieldCheck,
   Layers,
   Globe,
-  TrendingDown,
   Package,
   HeartHandshake,
+  Menu,
 } from "lucide-react";
 import { AuditSectionData, SectionStatus } from "../components/AuditSectionCard";
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 
 // ─── Full section dataset (same source of truth as audit page) ────────────────
 const AUDIT_SECTIONS: AuditSectionData[] = [
@@ -285,13 +285,21 @@ export default function AuditSectionPage({
   params: { sectionId: string };
 }) {
   const formParams = use(params as any) || {}
-  // const [nextStage, setNextStage] = useState(0)
-  console.log({formParams})
-  const { sectionId } = formParams as any
+  const [isMobile, setIsMobile] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-  console.log(sectionId)
+  const { sectionId } = formParams as any
   const router = useRouter();
-  const section = AUDIT_SECTIONS.find((s, index) => s.id === sectionId );
+  const section = AUDIT_SECTIONS.find((s) => s.id === sectionId);
 
   if (!section) {
     return (
@@ -313,8 +321,6 @@ export default function AuditSectionPage({
   const prevSection  = AUDIT_SECTIONS[currentIndex - 1] ?? null;
   const nextSection  = AUDIT_SECTIONS[currentIndex + 1] ?? null;
 
-  console.log({ currentIndex, prevSection, nextSection })
-
   return (
     <div className="min-h-full bg-[#f0f2f7]">
 
@@ -323,47 +329,61 @@ export default function AuditSectionPage({
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="bg-white border-b border-[#e5e7eb] px-6 py-4 flex items-center justify-between"
+        className="bg-white border-b border-[#e5e7eb] px-3 sm:px-4 md:px-6 py-3 sm:py-4 flex items-center justify-between flex-wrap gap-2"
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-1.5 text-[12.5px] text-[#6b7280] hover:text-[#374151] transition-colors"
+            className="flex items-center gap-1 sm:gap-1.5 text-[11px] sm:text-[12.5px] text-[#6b7280] hover:text-[#374151] transition-colors whitespace-nowrap"
           >
-            <ArrowLeft size={14} />
-            Back to audit
+            <ArrowLeft size={14} className="sm:w-[14px] sm:h-[14px]" />
+            <span className="hidden xs:inline">Back to audit</span>
+            <span className="xs:hidden">Back</span>
           </button>
-          <span className="text-[#d1d5db]">/</span>
-          <span className="text-[12.5px] text-[#9ca3af]">Q3 Operational Audit</span>
-          <span className="text-[#d1d5db]">/</span>
-          <span className="text-[12.5px] font-semibold text-[#374151]">{section.title}</span>
+          <span className="text-[#d1d5db] hidden sm:inline">/</span>
+          <span className="text-[11px] sm:text-[12.5px] text-[#9ca3af] truncate hidden sm:inline">Q3 Operational Audit</span>
+          <span className="text-[#d1d5db] hidden md:inline">/</span>
+          <span className="text-[11px] sm:text-[12.5px] font-semibold text-[#374151] truncate">{section.title}</span>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Mobile menu toggle */}
+        <button
+          onClick={() => setIsNavOpen(!isNavOpen)}
+          className="md:hidden flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#e5e7eb] text-[11px] text-[#374151] hover:bg-[#f9fafb] transition-colors"
+        >
+          <Menu size={14} />
+        </button>
+
+        {/* Desktop actions */}
+        <div className={`${isMobile && !isNavOpen ? 'hidden' : 'flex'} flex-wrap items-center gap-2 md:flex`}>
           <motion.button
             whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[#e5e7eb] text-[12px] text-[#374151] hover:bg-[#f9fafb] transition-colors"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl border border-[#e5e7eb] text-[11px] sm:text-[12px] text-[#374151] hover:bg-[#f9fafb] transition-colors whitespace-nowrap"
           >
-            <RefreshCw size={12} /> Re-analyse
+            <RefreshCw size={12} className="sm:w-[12px] sm:h-[12px]" /> 
+            <span className="hidden xs:inline">Re-analyse</span>
+            <span className="xs:hidden">Re-run</span>
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-white text-[12px] font-semibold"
+            className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-white text-[11px] sm:text-[12px] font-semibold whitespace-nowrap"
             style={{ background: section.gradient, boxShadow: `0 3px 12px ${section.color}30` }}
           >
-            <Download size={12} /> Export section
+            <Download size={12} className="sm:w-[12px] sm:h-[12px]" /> 
+            <span className="hidden xs:inline">Export section</span>
+            <span className="xs:hidden">Export</span>
           </motion.button>
         </div>
       </motion.div>
 
-      <div className="p-6 max-w-[960px] mx-auto">
+      <div className="p-3 sm:p-4 md:p-6 max-w-[960px] mx-auto">
 
         {/* ── Hero card ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
-          className="relative rounded-2xl bg-white border border-[#e5e7eb] overflow-hidden mb-5"
+          className="relative rounded-2xl bg-white border border-[#e5e7eb] overflow-hidden mb-4 sm:mb-5"
           style={{ boxShadow: "0 2px 20px rgba(0,0,0,0.06)" }}
         >
           {/* SVG pattern */}
@@ -379,50 +399,53 @@ export default function AuditSectionPage({
           {/* Left accent bar */}
           <div className="absolute left-0 top-0 bottom-0 w-1 rounded-l-2xl" style={{ background: section.gradient }} />
 
-          <div className="relative z-10 p-6 pl-7">
-            <div className="flex items-start gap-6">
-              <LargeScoreRing score={section.score} color={section.color} />
+          <div className="relative z-10 p-4 sm:p-6 pl-5 sm:pl-7">
+            <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+              {/* Score ring - centered on mobile */}
+              <div className="flex sm:block justify-center w-full sm:w-auto">
+                <LargeScoreRing score={section.score} color={section.color} />
+              </div>
 
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2.5 mb-2">
+              <div className="flex-1 min-w-0 w-full">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 mb-2">
                   <div
-                    className="w-8 h-8 rounded-xl flex items-center justify-center"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: `${section.color}14` }}
                   >
-                    <Icon size={16} style={{ color: section.color }} />
+                    <Icon size={14} className="sm:w-[16px] sm:h-[16px]" style={{ color: section.color }} />
                   </div>
                   <span
-                    className={`flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${statusPill}`}
+                    className={`flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-1 rounded-full border ${statusPill}`}
                   >
-                    <StatusIcon size={10} />
+                    <StatusIcon size={9} className="sm:w-[10px] sm:h-[10px]" />
                     {statusLabel}
                   </span>
                 </div>
 
-                <h1 className="text-[22px] font-bold text-[#0d1117] tracking-[-0.04em] leading-tight mb-1">
+                <h1 className="text-[18px] sm:text-[22px] font-bold text-[#0d1117] tracking-[-0.04em] leading-tight mb-1">
                   {section.title}
                 </h1>
-                <p className="text-[13.5px] text-[#6b7280] leading-relaxed mb-4 max-w-[480px]">
+                <p className="text-[12.5px] sm:text-[13.5px] text-[#6b7280] leading-relaxed mb-3 sm:mb-4 max-w-[480px]">
                   {section.purpose}
                 </p>
 
-                {/* Summary stat row */}
-                <div className="flex items-center gap-2 flex-wrap">
-                  <div className="flex items-center gap-1.5 bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-3 py-1.5">
-                    <AlertCircle size={11} className="text-red-400" />
-                    <span className="text-[11.5px] font-semibold text-[#374151]">{gaps.length} gaps</span>
+                {/* Summary stat row - scrollable on mobile */}
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap overflow-x-auto pb-1">
+                  <div className="flex items-center gap-1 sm:gap-1.5 bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 whitespace-nowrap">
+                    <AlertCircle size={10} className="sm:w-[11px] sm:h-[11px] text-red-400" />
+                    <span className="text-[10.5px] sm:text-[11.5px] font-semibold text-[#374151]">{gaps.length} gaps</span>
                   </div>
-                  <div className="flex items-center gap-1.5 bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-3 py-1.5">
-                    <TrendingUp size={11} className="text-emerald-500" />
-                    <span className="text-[11.5px] font-semibold text-[#374151]">{strengths.length} strengths</span>
+                  <div className="flex items-center gap-1 sm:gap-1.5 bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 whitespace-nowrap">
+                    <TrendingUp size={10} className="sm:w-[11px] sm:h-[11px] text-emerald-500" />
+                    <span className="text-[10.5px] sm:text-[11.5px] font-semibold text-[#374151]">{strengths.length} strengths</span>
                   </div>
-                  <div className="flex items-center gap-1.5 bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-3 py-1.5">
-                    <AlertTriangle size={11} className="text-amber-500" />
-                    <span className="text-[11.5px] font-semibold text-[#374151]">{warnings.length} warnings</span>
+                  <div className="flex items-center gap-1 sm:gap-1.5 bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 whitespace-nowrap">
+                    <AlertTriangle size={10} className="sm:w-[11px] sm:h-[11px] text-amber-500" />
+                    <span className="text-[10.5px] sm:text-[11.5px] font-semibold text-[#374151]">{warnings.length} warnings</span>
                   </div>
-                  <div className="flex items-center gap-1.5 bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-3 py-1.5">
-                    <FileText size={11} className="text-[#9ca3af]" />
-                    <span className="text-[11.5px] font-semibold text-[#374151]">{section.evidence.length} evidence sources</span>
+                  <div className="flex items-center gap-1 sm:gap-1.5 bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-2 sm:px-3 py-1 sm:py-1.5 whitespace-nowrap">
+                    <FileText size={10} className="sm:w-[11px] sm:h-[11px] text-[#9ca3af]" />
+                    <span className="text-[10.5px] sm:text-[11.5px] font-semibold text-[#374151]">{section.evidence.length} sources</span>
                   </div>
                 </div>
               </div>
@@ -431,10 +454,10 @@ export default function AuditSectionPage({
         </motion.div>
 
         {/* ── Two-column body ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-4 sm:gap-5">
 
           {/* Left — findings */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
 
             {/* Gaps */}
             {gaps.length > 0 && (
@@ -445,12 +468,12 @@ export default function AuditSectionPage({
                 className="bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden"
                 style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
               >
-                <div className="px-5 py-4 border-b border-[#f3f4f6] flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-red-50 flex items-center justify-center">
-                    <AlertCircle size={14} className="text-red-500" />
+                <div className="px-4 sm:px-5 py-3 sm:py-4 border-b border-[#f3f4f6] flex items-center gap-2 sm:gap-2.5">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                    <AlertCircle size={12} className="sm:w-[14px] sm:h-[14px] text-red-500" />
                   </div>
-                  <h2 className="text-[13.5px] font-semibold text-[#111827]">Gaps identified</h2>
-                  <span className="ml-auto text-[11px] font-bold bg-red-50 text-red-600 border border-red-100 px-2 py-0.5 rounded-full">
+                  <h2 className="text-[12.5px] sm:text-[13.5px] font-semibold text-[#111827]">Gaps identified</h2>
+                  <span className="ml-auto text-[10px] sm:text-[11px] font-bold bg-red-50 text-red-600 border border-red-100 px-1.5 sm:px-2 py-0.5 rounded-full">
                     {gaps.length}
                   </span>
                 </div>
@@ -461,13 +484,13 @@ export default function AuditSectionPage({
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.18 + i * 0.06, duration: 0.28 }}
-                      className="flex items-start gap-3.5 px-5 py-4"
+                      className="flex items-start gap-2.5 sm:gap-3.5 px-4 sm:px-5 py-3 sm:py-4"
                     >
                       <div className="w-5 h-5 rounded-full bg-red-50 border border-red-100 flex items-center justify-center shrink-0 mt-0.5">
-                        <span className="text-[10px] font-bold text-red-500">{i + 1}</span>
+                        <span className="text-[9px] sm:text-[10px] font-bold text-red-500">{i + 1}</span>
                       </div>
-                      <p className="text-[13px] text-[#374151] leading-relaxed flex-1">{finding.text}</p>
-                      <span className="shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-red-50 text-red-500 border border-red-100 mt-0.5">
+                      <p className="text-[12px] sm:text-[13px] text-[#374151] leading-relaxed flex-1">{finding.text}</p>
+                      <span className="shrink-0 text-[9px] sm:text-[10px] font-semibold px-1.5 sm:px-2 py-0.5 rounded-full bg-red-50 text-red-500 border border-red-100 mt-0.5">
                         Gap
                       </span>
                     </motion.div>
@@ -485,12 +508,12 @@ export default function AuditSectionPage({
                 className="bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden"
                 style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
               >
-                <div className="px-5 py-4 border-b border-[#f3f4f6] flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-amber-50 flex items-center justify-center">
-                    <AlertTriangle size={14} className="text-amber-500" />
+                <div className="px-4 sm:px-5 py-3 sm:py-4 border-b border-[#f3f4f6] flex items-center gap-2 sm:gap-2.5">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-amber-50 flex items-center justify-center shrink-0">
+                    <AlertTriangle size={12} className="sm:w-[14px] sm:h-[14px] text-amber-500" />
                   </div>
-                  <h2 className="text-[13.5px] font-semibold text-[#111827]">Warnings</h2>
-                  <span className="ml-auto text-[11px] font-bold bg-amber-50 text-amber-600 border border-amber-100 px-2 py-0.5 rounded-full">
+                  <h2 className="text-[12.5px] sm:text-[13.5px] font-semibold text-[#111827]">Warnings</h2>
+                  <span className="ml-auto text-[10px] sm:text-[11px] font-bold bg-amber-50 text-amber-600 border border-amber-100 px-1.5 sm:px-2 py-0.5 rounded-full">
                     {warnings.length}
                   </span>
                 </div>
@@ -501,10 +524,10 @@ export default function AuditSectionPage({
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.24 + i * 0.06, duration: 0.28 }}
-                      className="flex items-start gap-3.5 px-5 py-4"
+                      className="flex items-start gap-2.5 sm:gap-3.5 px-4 sm:px-5 py-3 sm:py-4"
                     >
-                      <AlertTriangle size={14} className="text-amber-400 mt-0.5 shrink-0" />
-                      <p className="text-[13px] text-[#374151] leading-relaxed">{finding.text}</p>
+                      <AlertTriangle size={12} className="sm:w-[14px] sm:h-[14px] text-amber-400 mt-0.5 shrink-0" />
+                      <p className="text-[12px] sm:text-[13px] text-[#374151] leading-relaxed">{finding.text}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -520,12 +543,12 @@ export default function AuditSectionPage({
                 className="bg-white rounded-2xl border border-[#e5e7eb] overflow-hidden"
                 style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
               >
-                <div className="px-5 py-4 border-b border-[#f3f4f6] flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-50 flex items-center justify-center">
-                    <TrendingUp size={14} className="text-emerald-500" />
+                <div className="px-4 sm:px-5 py-3 sm:py-4 border-b border-[#f3f4f6] flex items-center gap-2 sm:gap-2.5">
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+                    <TrendingUp size={12} className="sm:w-[14px] sm:h-[14px] text-emerald-500" />
                   </div>
-                  <h2 className="text-[13.5px] font-semibold text-[#111827]">Strengths</h2>
-                  <span className="ml-auto text-[11px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100 px-2 py-0.5 rounded-full">
+                  <h2 className="text-[12.5px] sm:text-[13.5px] font-semibold text-[#111827]">Strengths</h2>
+                  <span className="ml-auto text-[10px] sm:text-[11px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-100 px-1.5 sm:px-2 py-0.5 rounded-full">
                     {strengths.length}
                   </span>
                 </div>
@@ -536,10 +559,10 @@ export default function AuditSectionPage({
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.32 + i * 0.06, duration: 0.28 }}
-                      className="flex items-start gap-3.5 px-5 py-4"
+                      className="flex items-start gap-2.5 sm:gap-3.5 px-4 sm:px-5 py-3 sm:py-4"
                     >
-                      <CheckCircle2 size={14} className="text-emerald-400 mt-0.5 shrink-0" />
-                      <p className="text-[13px] text-[#374151] leading-relaxed">{finding.text}</p>
+                      <CheckCircle2 size={12} className="sm:w-[14px] sm:h-[14px] text-emerald-400 mt-0.5 shrink-0" />
+                      <p className="text-[12px] sm:text-[13px] text-[#374151] leading-relaxed">{finding.text}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -547,40 +570,40 @@ export default function AuditSectionPage({
             )}
           </div>
 
-          {/* Right — sidebar */}
-          <div className="space-y-4">
+          {/* Right — sidebar (stacks below on mobile) */}
+          <div className="space-y-3 sm:space-y-4">
 
             {/* Evidence used */}
             <motion.div
               initial={{ opacity: 0, x: 14 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.15, duration: 0.35 }}
-              className="bg-white rounded-2xl border border-[#e5e7eb] p-5"
+              className="bg-white rounded-2xl border border-[#e5e7eb] p-4 sm:p-5"
               style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
             >
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: `${section.color}14` }}>
-                  <Link2 size={12} style={{ color: section.color }} />
+              <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-lg flex items-center justify-center" style={{ background: `${section.color}14` }}>
+                  <Link2 size={11} className="sm:w-[12px] sm:h-[12px]" style={{ color: section.color }} />
                 </div>
-                <h3 className="text-[12.5px] font-semibold text-[#111827]">Evidence used</h3>
+                <h3 className="text-[11.5px] sm:text-[12.5px] font-semibold text-[#111827]">Evidence used</h3>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5 sm:space-y-2">
                 {section.evidence.map((ev, i) => (
                   <motion.div
                     key={ev}
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 + i * 0.06 }}
-                    className="flex items-center gap-2.5 p-2.5 rounded-xl border border-[#f3f4f6] bg-[#f9fafb]"
+                    className="flex items-center gap-2 sm:gap-2.5 p-2 sm:p-2.5 rounded-xl border border-[#f3f4f6] bg-[#f9fafb]"
                   >
                     <div
-                      className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
+                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-lg flex items-center justify-center shrink-0"
                       style={{ background: `${section.color}12` }}
                     >
-                      <FileText size={11} style={{ color: section.color }} />
+                      <FileText size={10} className="sm:w-[11px] sm:h-[11px]" style={{ color: section.color }} />
                     </div>
-                    <span className="text-[12px] font-medium text-[#374151]">{ev}</span>
-                    <CheckCircle2 size={11} className="text-emerald-400 ml-auto shrink-0" />
+                    <span className="text-[11px] sm:text-[12px] font-medium text-[#374151] truncate">{ev}</span>
+                    <CheckCircle2 size={10} className="sm:w-[11px] sm:h-[11px] text-emerald-400 ml-auto shrink-0" />
                   </motion.div>
                 ))}
               </div>
@@ -591,26 +614,26 @@ export default function AuditSectionPage({
               initial={{ opacity: 0, x: 14 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.22, duration: 0.35 }}
-              className="bg-white rounded-2xl border border-[#e5e7eb] p-5"
+              className="bg-white rounded-2xl border border-[#e5e7eb] p-4 sm:p-5"
               style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
             >
-              <h3 className="text-[12.5px] font-semibold text-[#111827] mb-4">Finding breakdown</h3>
+              <h3 className="text-[11.5px] sm:text-[12.5px] font-semibold text-[#111827] mb-3 sm:mb-4">Finding breakdown</h3>
               {(["gap", "strength", "warning"] as const).map((type) => {
                 const count = section.findings.filter((f) => f.type === type).length;
                 const total = section.findings.length;
                 const { dot, label, pill } = findingMeta[type];
                 return (
-                  <div key={type} className="mb-3 last:mb-0">
-                    <div className="flex items-center justify-between mb-1.5">
-                      <div className="flex items-center gap-2">
-                        <span className={`w-2 h-2 rounded-full ${dot}`} />
-                        <span className="text-[11.5px] font-medium text-[#374151]">{label}s</span>
+                  <div key={type} className="mb-2.5 sm:mb-3 last:mb-0">
+                    <div className="flex items-center justify-between mb-1 sm:mb-1.5">
+                      <div className="flex items-center gap-1.5 sm:gap-2">
+                        <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${dot}`} />
+                        <span className="text-[10.5px] sm:text-[11.5px] font-medium text-[#374151]">{label}s</span>
                       </div>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${pill}`}>
+                      <span className={`text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full border ${pill}`}>
                         {count}
                       </span>
                     </div>
-                    <div className="h-1.5 bg-[#f3f4f6] rounded-full overflow-hidden">
+                    <div className="h-1 sm:h-1.5 bg-[#f3f4f6] rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${(count / total) * 100}%` }}
@@ -623,71 +646,69 @@ export default function AuditSectionPage({
               })}
             </motion.div>
 
-            {/* Section navigation */}
-            <motion.div
-              initial={{ opacity: 0, x: 14 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.28, duration: 0.35 }}
-              className="bg-white rounded-2xl border border-[#e5e7eb] p-4"
-              style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
-            >
-              <p className="text-[11px] font-semibold text-[#9ca3af] uppercase tracking-widest mb-3">
-                Navigate sections
-              </p>
-              <div className="space-y-1.5">
-                {prevSection && (
-                  <button
-                    onClick={() =>
-                      router.push(`/dashboard/audit/${prevSection.id}`)
-                    }
-                    className="w-full flex items-center gap-2.5 p-2.5 rounded-xl border border-[#f3f4f6] hover:border-[#e5e7eb] hover:bg-[#f9fafb] transition-colors text-left group"
-                  >
-                    <ArrowLeft size={12} className="text-[#9ca3af] group-hover:text-[#374151] transition-colors" />
-                    <span className="text-[12px] font-medium text-[#374151] truncate">{prevSection.title}</span>
-                  </button>
-                )}
-                {nextSection && (
-                  <button
-                    onClick={() =>
-                      router.push(`/dashboard/audit/${nextSection.id}`)
-                    }
-                    className="w-full flex items-center gap-2.5 p-2.5 rounded-xl border border-[#f3f4f6] hover:border-[#e5e7eb] hover:bg-[#f9fafb] transition-colors text-left group"
-                  >
-                    <span className="text-[12px] font-medium text-[#374151] truncate flex-1">{nextSection.title}</span>
-                    <ChevronRight size={12} className="text-[#9ca3af] group-hover:text-[#374151] shrink-0 transition-colors" />
-                  </button>
-                )}
-              </div>
-            </motion.div>
+            {/* Section navigation - hidden on mobile, shown at bottom */}
+            <div className="hidden lg:block">
+              <motion.div
+                initial={{ opacity: 0, x: 14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.28, duration: 0.35 }}
+                className="bg-white rounded-2xl border border-[#e5e7eb] p-4"
+                style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
+              >
+                <p className="text-[11px] font-semibold text-[#9ca3af] uppercase tracking-widest mb-3">
+                  Navigate sections
+                </p>
+                <div className="space-y-1.5">
+                  {prevSection && (
+                    <button
+                      onClick={() => router.push(`/dashboard/audit/${prevSection.id}`)}
+                      className="w-full flex items-center gap-2.5 p-2.5 rounded-xl border border-[#f3f4f6] hover:border-[#e5e7eb] hover:bg-[#f9fafb] transition-colors text-left group"
+                    >
+                      <ArrowLeft size={12} className="text-[#9ca3af] group-hover:text-[#374151] transition-colors shrink-0" />
+                      <span className="text-[12px] font-medium text-[#374151] truncate">{prevSection.title}</span>
+                    </button>
+                  )}
+                  {nextSection && (
+                    <button
+                      onClick={() => router.push(`/dashboard/audit/${nextSection.id}`)}
+                      className="w-full flex items-center gap-2.5 p-2.5 rounded-xl border border-[#f3f4f6] hover:border-[#e5e7eb] hover:bg-[#f9fafb] transition-colors text-left group"
+                    >
+                      <span className="text-[12px] font-medium text-[#374151] truncate flex-1">{nextSection.title}</span>
+                      <ChevronRight size={12} className="text-[#9ca3af] group-hover:text-[#374151] shrink-0 transition-colors" />
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+            </div>
 
           </div>
         </div>
 
-        {/* ── Bottom section navigation bar ── */}
+        {/* ── Bottom navigation bar - mobile friendly ── */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.3 }}
-          className="mt-6 flex items-center justify-between bg-white border border-[#e5e7eb] rounded-2xl px-5 py-4"
+          className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between bg-white border border-[#e5e7eb] rounded-2xl px-3 sm:px-5 py-3 sm:py-4 gap-2 sm:gap-0"
           style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
         >
           <div>
             {prevSection ? (
               <button
                 onClick={() => router.push(`/dashboard/audit/${prevSection.id}`)}
-                className="flex items-center gap-2 text-[13px] font-medium text-[#374151] hover:text-[#103fd5] transition-colors"
+                className="flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2 text-[12px] sm:text-[13px] font-medium text-[#374151] hover:text-[#103fd5] transition-colors w-full sm:w-auto"
               >
-                <ArrowLeft size={14} />
-                <span>{prevSection.title}</span>
+                <ArrowLeft size={14} className="sm:w-[14px] sm:h-[14px]" />
+                <span className="truncate">{prevSection.title}</span>
               </button>
             ) : (
-              <span className="text-[13px] text-[#9ca3af]">First section</span>
+              <span className="text-[12px] sm:text-[13px] text-[#9ca3af] block text-center sm:text-left">First section</span>
             )}
           </div>
 
           <button
             onClick={() => router.push(`/dashboard/audit`)}
-            className="text-[12.5px] text-[#6b7280] hover:text-[#374151] transition-colors"
+            className="text-[11.5px] sm:text-[12.5px] text-[#6b7280] hover:text-[#374151] transition-colors text-center py-1 sm:py-0"
           >
             All sections
           </button>
@@ -696,13 +717,13 @@ export default function AuditSectionPage({
             {nextSection ? (
               <button
                 onClick={() => router.push(`/dashboard/audit/${nextSection.id}`)}
-                className="flex items-center gap-2 text-[13px] font-medium text-[#374151] hover:text-[#103fd5] transition-colors"
+                className="flex items-center justify-center sm:justify-end gap-1.5 sm:gap-2 text-[12px] sm:text-[13px] font-medium text-[#374151] hover:text-[#103fd5] transition-colors w-full sm:w-auto"
               >
-                <span>{nextSection.title}</span>
-                <ChevronRight size={14} />
+                <span className="truncate">{nextSection.title}</span>
+                <ChevronRight size={14} className="sm:w-[14px] sm:h-[14px]" />
               </button>
             ) : (
-              <span className="text-[13px] text-[#9ca3af]">Last section</span>
+              <span className="text-[12px] sm:text-[13px] text-[#9ca3af] block text-center sm:text-right">Last section</span>
             )}
           </div>
         </motion.div>

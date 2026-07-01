@@ -31,7 +31,7 @@ export default function ProjectSwitcher() {
         />
 
         <div className="text-left">
-          <p className="text-[12px] font-semibold text-[#111827] leading-none truncate max-w-[140px]">
+          <p className="text-[12px] font-semibold text-[#111827] leading-none truncate max-w-[120px]">
             {activeProject.businessName}
           </p>
           {/* <p className="text-[10.5px] text-[#9ca3af] mt-0.5 truncate max-w-[140px]">
@@ -54,7 +54,7 @@ export default function ProjectSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute z-50 top-full -left-40 mt-2 w-[280px] bg-white border border-[#e5e7eb] rounded-2xl shadow-xl z-50 overflow-hidden"
+            className="absolute z-50 top-full md:-left-40 mt-2 w-[280px] bg-white border border-[#e5e7eb] rounded-2xl shadow-xl z-50 overflow-hidden"
             style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}
           >
            

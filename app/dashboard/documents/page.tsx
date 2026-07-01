@@ -209,34 +209,36 @@ function LinkedResourceCard({ resource, delay = 0 }: { resource: LinkedResource;
       </svg>
       <div className="h-[3px] w-full relative z-10" style={{ background: resource.gradient }} />
 
-      <div className="relative z-10 p-4">
+      <div className="relative z-10 p-3 sm:p-4">
         <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center border border-[#f3f4f6]"
+          <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center border border-[#f3f4f6] shrink-0"
               style={{ background: `${resource.color}12` }}
             >
-              <Icon size={15} style={{ color: resource.color }} />
+              <Icon size={13} className="sm:w-[15px] sm:h-[15px]" style={{ color: resource.color }} />
             </div>
-            <div>
-              <p className="text-[12.5px] font-semibold text-[#111827] leading-none">{resource.name}</p>
-              <p className="text-[10.5px] text-[#9ca3af] mt-0.5">{resource.type}</p>
+            <div className="min-w-0">
+              <p className="text-[11.5px] sm:text-[12.5px] font-semibold text-[#111827] leading-none truncate">
+                {resource.name}
+              </p>
+              <p className="text-[9.5px] sm:text-[10.5px] text-[#9ca3af] mt-0.5">{resource.type}</p>
             </div>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
             <span className={`w-1.5 h-1.5 rounded-full ${statusDot}`} />
-            <span className="text-[10.5px] text-[#9ca3af]">{resource.lastSynced}</span>
+            <span className="text-[9.5px] sm:text-[10.5px] text-[#9ca3af]">{resource.lastSynced}</span>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-1.5">
           {resource.stats.map((stat) => (
             <div key={stat.label}
-              className="bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-2.5 py-2 text-center"
+              className="bg-[#f9fafb] border border-[#f3f4f6] rounded-xl px-2 sm:px-2.5 py-1.5 sm:py-2 text-center"
             >
-              <p className="text-[14px] font-bold text-[#111827] leading-none tracking-[-0.03em]">
+              <p className="text-[12px] sm:text-[14px] font-bold text-[#111827] leading-none tracking-[-0.03em]">
                 {stat.value}
               </p>
-              <p className="text-[10px] text-[#9ca3af] mt-0.5">{stat.label}</p>
+              <p className="text-[9px] sm:text-[10px] text-[#9ca3af] mt-0.5">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -270,18 +272,20 @@ export default function DocumentsPage() {
   });
 
   return (
-    <div className="p-6 max-w-[1200px] mx-auto">
+    <div className="p-3 sm:p-4 md:p-6 max-w-[1200px] mx-auto">
 
       {/* ── Page header ── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="flex items-start justify-between mb-5"
+        className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-0 mb-4 sm:mb-5"
       >
         <div>
-          <h1 className="text-[22px] font-bold text-[#0d1117] tracking-[-0.04em]">Documents & Sources</h1>
-          <p className="text-[13px] text-[#6b7280] mt-0.5">
+          <h1 className="text-[20px] sm:text-[22px] font-bold text-[#0d1117] tracking-[-0.04em]">
+            Documents & Sources
+          </h1>
+          <p className="text-[12px] sm:text-[13px] text-[#6b7280] mt-0.5 truncate max-w-[200px] sm:max-w-none">
             Information feeding into{" "}
             <span className="font-semibold text-[#374151]">{activeProject.businessName}</span>
             {" "}· {activeProject.name}
@@ -291,21 +295,22 @@ export default function DocumentsPage() {
         <motion.button
           whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
           onClick={() => fileInputRef.current?.click()}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-white text-[13px] font-semibold"
+          className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-white text-[12px] sm:text-[13px] font-semibold shrink-0"
           style={{
             background: activeProject.lensGradient,
             boxShadow: `0 4px 14px ${activeProject.lensColor}28`,
           }}
         >
-          <Upload size={14} />
-          Upload documents
+          <Upload size={13} className="sm:w-[14px] sm:h-[14px]" />
+          <span className="hidden xs:inline">Upload documents</span>
+          <span className="xs:hidden">Upload</span>
         </motion.button>
         <input ref={fileInputRef} type="file" multiple className="hidden"
           accept=".pdf,.xlsx,.docx,.csv,.png,.jpg" />
       </motion.div>
 
       {/* ── Stat row ── */}
-      <div className="grid grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
         {DOC_STATS.map((stat, i) => {
           const Icon = stat.icon;
           return (
@@ -324,15 +329,15 @@ export default function DocumentsPage() {
                 <rect width="100%" height="100%" fill={`url(#ds-${i})`} />
               </svg>
               <div className="h-[3px]" style={{ background: `linear-gradient(90deg, ${stat.color} 0%, ${stat.color}88 100%)` }} />
-              <div className="relative z-10 p-4 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: stat.bg }}>
-                  <Icon size={16} style={{ color: stat.color }} />
+              <div className="relative z-10 p-3 sm:p-4 flex items-center gap-2 sm:gap-3">
+                <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0" style={{ background: stat.bg }}>
+                  <Icon size={14} className="sm:w-4 sm:h-4" style={{ color: stat.color }} />
                 </div>
-                <div>
-                  <p className="text-[20px] font-bold text-[#0d1117] leading-none tracking-[-0.04em]">
+                <div className="min-w-0">
+                  <p className="text-[16px] sm:text-[20px] font-bold text-[#0d1117] leading-none tracking-[-0.04em]">
                     {stat.value}
                   </p>
-                  <p className="text-[11px] text-[#9ca3af] mt-0.5">{stat.label}</p>
+                  <p className="text-[10px] sm:text-[11px] text-[#9ca3af] mt-0.5 truncate">{stat.label}</p>
                 </div>
               </div>
             </motion.div>
@@ -345,7 +350,7 @@ export default function DocumentsPage() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.14 }}
-        className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 w-fit mb-5"
+        className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 w-full sm:w-fit mb-4 sm:mb-5 overflow-x-auto scrollbar-none"
       >
         {(["documents", "sources"] as const).map((tab) => {
           const active = activeTab === tab;
@@ -354,7 +359,7 @@ export default function DocumentsPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className="relative flex items-center gap-2 px-4 py-2 rounded-lg text-[12.5px] font-medium capitalize transition-colors"
+              className="relative flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-[12.5px] font-medium capitalize transition-colors whitespace-nowrap flex-1 sm:flex-none justify-center"
               style={{ color: active ? "#103fd5" : "#6b7280" }}
             >
               {active && (
@@ -364,7 +369,7 @@ export default function DocumentsPage() {
                   transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                 />
               )}
-              <TabIcon size={13} className="relative z-10" />
+              <TabIcon size={12} className="sm:w-[13px] sm:h-[13px] relative z-10" />
               <span className="relative z-10">
                 {tab === "documents" ? "Uploaded documents" : "Connected sources"}
               </span>
@@ -385,22 +390,22 @@ export default function DocumentsPage() {
             transition={{ duration: 0.22 }}
           >
             {/* Toolbar */}
-            <div className="flex items-center gap-2.5 mb-4 flex-wrap">
-              <div className="flex items-center gap-2 bg-white border border-[#e5e7eb] rounded-xl px-3 py-2 w-[220px]">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4">
+              <div className="flex items-center gap-2 bg-white border border-[#e5e7eb] rounded-xl px-3 py-1.5 sm:py-2 w-full sm:w-[220px]">
                 <Search size={13} className="text-[#9ca3af] shrink-0" />
                 <input value={search} onChange={e => setSearch(e.target.value)}
                   placeholder="Search documents..."
-                  className="text-[12.5px] text-[#374151] placeholder:text-[#9ca3af] outline-none flex-1 bg-transparent"
+                  className="text-[11.5px] sm:text-[12.5px] text-[#374151] placeholder:text-[#9ca3af] outline-none flex-1 bg-transparent min-w-0"
                 />
               </div>
 
               {/* Status filter */}
-              <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1">
+              <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 overflow-x-auto scrollbar-none shrink-0">
                 {DOC_STATUSES.map((s) => {
                   const active = statusFilter === s;
                   return (
                     <button key={s} onClick={() => setStatusFilter(s)}
-                      className="relative px-3 py-1.5 rounded-lg text-[11.5px] font-medium transition-colors"
+                      className="relative px-2 sm:px-3 py-1.5 rounded-lg text-[10.5px] sm:text-[11.5px] font-medium transition-colors whitespace-nowrap"
                       style={{ color: active ? "#103fd5" : "#6b7280" }}
                     >
                       {active && (
@@ -414,14 +419,16 @@ export default function DocumentsPage() {
               </div>
 
               {/* View toggle */}
-              <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 ml-auto">
+              <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 ml-auto shrink-0">
                 {(["grid", "list"] as const).map((v) => {
                   const VIcon = v === "grid" ? LayoutGrid : List;
                   return (
                     <button key={v} onClick={() => setView(v)}
-                      className={`p-2 rounded-lg transition-colors ${view === v ? "bg-[#eef2ff] text-[#103fd5]" : "text-[#9ca3af] hover:text-[#374151]"}`}
+                      className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
+                        view === v ? "bg-[#eef2ff] text-[#103fd5]" : "text-[#9ca3af] hover:text-[#374151]"
+                      }`}
                     >
-                      <VIcon size={13} />
+                      <VIcon size={12} className="sm:w-[13px] sm:h-[13px]" />
                     </button>
                   );
                 })}
@@ -429,13 +436,13 @@ export default function DocumentsPage() {
             </div>
 
             {/* Category chips */}
-            <div className="flex items-center gap-1.5 mb-4 flex-wrap">
-              <SlidersHorizontal size={12} className="text-[#9ca3af]" />
+            <div className="flex items-center gap-1 sm:gap-1.5 mb-3 sm:mb-4 overflow-x-auto scrollbar-none">
+              <SlidersHorizontal size={11} className="sm:w-[12px] sm:h-[12px] text-[#9ca3af] shrink-0" />
               {DOC_CATEGORIES.map((cat) => {
                 const active = category === cat;
                 return (
                   <button key={cat} onClick={() => setCategory(cat)}
-                    className="px-2.5 py-1 rounded-lg text-[11.5px] font-medium border transition-all"
+                    className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-[11.5px] font-medium border transition-all shrink-0 whitespace-nowrap"
                     style={{
                       background:  active ? activeProject.lensColor : "white",
                       color:       active ? "white" : "#6b7280",
@@ -451,7 +458,7 @@ export default function DocumentsPage() {
 
             {filtered.length > 0 ? (
               <div className={view === "grid"
-                ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+                ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4"
                 : "flex flex-col gap-3"
               }>
                 {filtered.map((doc, i) => (
@@ -464,25 +471,25 @@ export default function DocumentsPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 * filtered.length, duration: 0.35 }}
                   onClick={() => fileInputRef.current?.click()}
-                  className="min-h-[200px] rounded-2xl border-2 border-dashed border-[#d1d5db] bg-white flex flex-col items-center justify-center gap-3 cursor-pointer group hover:border-[#103fd5] hover:bg-[#f8faff] transition-all"
+                  className="min-h-[180px] sm:min-h-[200px] rounded-2xl border-2 border-dashed border-[#d1d5db] bg-white flex flex-col items-center justify-center gap-2 sm:gap-3 cursor-pointer group hover:border-[#103fd5] hover:bg-[#f8faff] transition-all p-4"
                 >
-                  <div className="w-11 h-11 rounded-xl border-2 border-dashed border-[#d1d5db] flex items-center justify-center text-[#9ca3af] group-hover:border-[#103fd5] group-hover:text-[#103fd5] group-hover:bg-[#eef2ff] transition-all">
-                    <Upload size={18} />
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl border-2 border-dashed border-[#d1d5db] flex items-center justify-center text-[#9ca3af] group-hover:border-[#103fd5] group-hover:text-[#103fd5] group-hover:bg-[#eef2ff] transition-all">
+                    <Upload size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </div>
                   <div className="text-center">
-                    <p className="text-[13px] font-semibold text-[#374151] group-hover:text-[#103fd5] transition-colors">
+                    <p className="text-[12px] sm:text-[13px] font-semibold text-[#374151] group-hover:text-[#103fd5] transition-colors">
                       Upload more documents
                     </p>
-                    <p className="text-[11.5px] text-[#9ca3af] mt-0.5">PDF, XLSX, DOCX, CSV — up to 50MB</p>
+                    <p className="text-[10.5px] sm:text-[11.5px] text-[#9ca3af] mt-0.5">PDF, XLSX, DOCX, CSV — up to 50MB</p>
                   </div>
                 </motion.div>
               </div>
             ) : (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
-                <FolderOpen size={32} className="text-[#d1d5db] mx-auto mb-3" />
-                <p className="text-[14px] font-medium text-[#6b7280]">No documents match</p>
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12 sm:py-16">
+                <FolderOpen size={28} className="sm:w-8 sm:h-8 text-[#d1d5db] mx-auto mb-3" />
+                <p className="text-[13px] sm:text-[14px] font-medium text-[#6b7280]">No documents match</p>
                 <button onClick={() => { setSearch(""); setCategory("All"); setStatusFilter("All"); }}
-                  className="text-[12.5px] text-[#103fd5] font-medium mt-2 hover:underline"
+                  className="text-[12px] sm:text-[12.5px] text-[#103fd5] font-medium mt-2 hover:underline"
                 >
                   Clear filters
                 </button>
@@ -505,7 +512,7 @@ export default function DocumentsPage() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.05 }}
-              className="relative bg-white border border-[#e5e7eb] rounded-2xl p-4 mb-5 overflow-hidden"
+              className="relative bg-white border border-[#e5e7eb] rounded-2xl p-3 sm:p-4 mb-4 sm:mb-5 overflow-hidden"
               style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
             >
               <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
@@ -514,7 +521,7 @@ export default function DocumentsPage() {
                 </pattern></defs>
                 <rect width="100%" height="100%" fill="url(#src-dots)" />
               </svg>
-              <div className="relative z-10 flex items-center gap-6 flex-wrap">
+              <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4">
                 {[
                   { label: "Live sources",  value: LINKED_RESOURCES.filter(r => r.status === "live").length,  icon: CheckCircle2, color: "#059669" },
                   { label: "Stale sources", value: LINKED_RESOURCES.filter(r => r.status === "stale").length, icon: Clock,        color: "#d97706" },
@@ -525,15 +532,15 @@ export default function DocumentsPage() {
                 ].map((item) => {
                   const Icon = item.icon;
                   return (
-                    <div key={item.label} className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg flex items-center justify-center"
+                    <div key={item.label} className="flex items-center gap-1.5 sm:gap-2">
+                      <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center shrink-0"
                         style={{ background: `${item.color}14` }}
                       >
-                        <Icon size={13} style={{ color: item.color }} />
+                        <Icon size={11} className="sm:w-[13px] sm:h-[13px]" style={{ color: item.color }} />
                       </div>
-                      <div>
-                        <p className="text-[14px] font-bold text-[#0d1117] leading-none">{item.value}</p>
-                        <p className="text-[10.5px] text-[#9ca3af] mt-0.5">{item.label}</p>
+                      <div className="min-w-0">
+                        <p className="text-[13px] sm:text-[14px] font-bold text-[#0d1117] leading-none">{item.value}</p>
+                        <p className="text-[9px] sm:text-[10.5px] text-[#9ca3af] mt-0.5 truncate">{item.label}</p>
                       </div>
                     </div>
                   );
@@ -541,10 +548,10 @@ export default function DocumentsPage() {
               </div>
             </motion.div>
 
-            <p className="text-[12.5px] font-semibold text-[#374151] mb-3">
+            <p className="text-[12px] sm:text-[12.5px] font-semibold text-[#374151] mb-3">
               Live data from connected integrations
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
               {LINKED_RESOURCES.map((resource, i) => (
                 <LinkedResourceCard key={resource.id} resource={resource} delay={0.06 * i} />
               ))}

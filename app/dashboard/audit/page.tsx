@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// expanded state removed — section cards now navigate to their own page
 import { motion } from "framer-motion";
 import {
   Target,
@@ -36,7 +35,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["Business Plan", "Notion", "Interviews"],
     color: "#103fd5",
     gradient: "linear-gradient(135deg, #103fd5 0%, #5d7cff 100%)",
-    pattern: "dots",
+    pattern: "rings",
     findings: [
       { type: "strength", text: "Clear 3-year vision documented in business plan with defined market positioning." },
       { type: "gap", text: "No OKR or quarterly goal-setting framework is in place." },
@@ -56,7 +55,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["Expense Reports", "Bank Statements", "P&L Upload"],
     color: "#d97706",
     gradient: "linear-gradient(135deg, #d97706 0%, #fbbf24 100%)",
-    pattern: "grid",
+    pattern: "rings",
     findings: [
       { type: "gap", text: "No formal budget vs actuals tracking — expenses are managed reactively." },
       { type: "gap", text: "Runway is less than 4 months at current burn rate with no fundraising in pipeline." },
@@ -78,7 +77,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["Notion", "Jira", "SOP Upload"],
     color: "#059669",
     gradient: "linear-gradient(135deg, #059669 0%, #34d399 100%)",
-    pattern: "lines",
+    pattern: "rings",
     findings: [
       { type: "strength", text: "Core workflows are documented in Notion and referenced by the team." },
       { type: "gap", text: "No SLA framework — delivery timelines are informally negotiated per client." },
@@ -117,7 +116,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["Org Chart", "HR Docs", "Interviews"],
     color: "#0891b2",
     gradient: "linear-gradient(135deg, #0891b2 0%, #67e8f9 100%)",
-    pattern: "cross",
+    pattern: "rings",
     findings: [
       { type: "gap", text: "No formal performance review cycle exists — feedback is ad hoc." },
       { type: "gap", text: "4 out of 8 roles have no documented job descriptions." },
@@ -138,7 +137,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["Product Docs", "Jira", "Customer Feedback"],
     color: "#dc2626",
     gradient: "linear-gradient(135deg, #dc2626 0%, #f87171 100%)",
-    pattern: "dots",
+    pattern: "rings",
     findings: [
       { type: "strength", text: "Core offering is well-differentiated with documented unique value proposition." },
       { type: "strength", text: "Customer retention rate is 81% — strong product-market signal." },
@@ -157,7 +156,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["Instagram", "LinkedIn", "Website Audit", "X (Twitter)"],
     color: "#0f766e",
     gradient: "linear-gradient(135deg, #0f766e 0%, #2dd4bf 100%)",
-    pattern: "wave",
+    pattern: "rings",
     findings: [
       { type: "strength", text: "Website is live, mobile-responsive, and loads under 2.5 seconds." },
       { type: "gap", text: "No SEO strategy — organic search traffic is less than 3% of total visits." },
@@ -177,7 +176,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["CAC Docs", "Contracts Upload", "Policy Docs"],
     color: "#64748b",
     gradient: "linear-gradient(135deg, #475569 0%, #94a3b8 100%)",
-    pattern: "grid",
+    pattern: "rings",
     findings: [
       { type: "gap", text: "No client contract template exists — agreements are made verbally or via email." },
       { type: "gap", text: "Data privacy policy is not published on the website (NDPR requirement)." },
@@ -198,7 +197,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["CRM", "Sales Reports", "Pitch Docs"],
     color: "#b45309",
     gradient: "linear-gradient(135deg, #b45309 0%, #fcd34d 100%)",
-    pattern: "lines",
+    pattern: "rings",
     findings: [
       { type: "strength", text: "3-month sales pipeline is documented and reviewed weekly." },
       { type: "gap", text: "No formal CRM in use — leads are tracked in a spreadsheet." },
@@ -237,7 +236,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["Notion", "Google Analytics", "CRM Export"],
     color: "#ec4899",
     gradient: "linear-gradient(135deg, #ec4899 0%, #f9a8d4 100%)",
-    pattern: "cross",
+    pattern: "rings",
     findings: [
       { type: "gap", text: "No business intelligence dashboard exists — decisions are based on intuition." },
       { type: "gap", text: "Customer data is scattered across WhatsApp, email, and spreadsheets." },
@@ -257,7 +256,7 @@ const AUDIT_SECTIONS: AuditSectionData[] = [
     evidence: ["Org Chart", "SOP Upload", "Tech Stack Docs"],
     color: "#14b8a6",
     gradient: "linear-gradient(135deg, #0d9488 0%, #5eead4 100%)",
-    pattern: "wave",
+    pattern: "rings",
     findings: [
       { type: "gap", text: "No documented playbook for scaling team — growth plans are ad hoc." },
       { type: "gap", text: "Technology stack has no redundancy — a single server failure would halt operations." },
@@ -292,7 +291,7 @@ export default function AuditPage({ params }: { params: { id: string } }) {
   const completedSections = AUDIT_SECTIONS.filter((s) => s.status === "complete").length;
 
   return (
-    <div className="p-6 max-w-[1200px] mx-auto">
+    <div className="p-3 sm:p-4 md:p-6 max-w-[1200px] mx-auto">
       {/* Summary header */}
       <AuditSummaryHeader
         businessName="Adaeze Retail Co."
@@ -313,10 +312,10 @@ export default function AuditPage({ params }: { params: { id: string } }) {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.12, duration: 0.3 }}
-        className="flex items-center gap-3 mb-5 flex-wrap"
+        className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-4 sm:mb-5"
       >
-        {/* Filter tabs */}
-        <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1">
+        {/* Filter tabs - horizontal scroll on mobile */}
+        <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 overflow-x-auto scrollbar-none flex-shrink-0">
           {FILTER_OPTIONS.map((f) => {
             const counts: Record<FilterOption, number> = {
               All: AUDIT_SECTIONS.length,
@@ -330,7 +329,7 @@ export default function AuditPage({ params }: { params: { id: string } }) {
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className="relative px-3 py-1.5 rounded-lg text-[12px] font-medium flex items-center gap-1.5 transition-colors"
+                className="relative px-2 sm:px-3 py-1.5 rounded-lg text-[11px] sm:text-[12px] font-medium flex items-center gap-1 transition-colors whitespace-nowrap"
                 style={{ color: active ? "#103fd5" : "#6b7280" }}
               >
                 {active && (
@@ -342,7 +341,7 @@ export default function AuditPage({ params }: { params: { id: string } }) {
                 )}
                 <span className="relative z-10">{f}</span>
                 <span
-                  className="relative z-10 text-[10px] font-bold px-1.5 py-0.5 rounded-full"
+                  className="relative z-10 text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full"
                   style={{
                     background: active ? "#103fd5" : "#f3f4f6",
                     color: active ? "#fff" : "#9ca3af",
@@ -356,18 +355,22 @@ export default function AuditPage({ params }: { params: { id: string } }) {
         </div>
 
         {/* View toggle */}
-        <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 ml-auto">
+        <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 ml-auto shrink-0">
           <button
             onClick={() => setView("grid")}
-            className={`p-2 rounded-lg transition-colors ${view === "grid" ? "bg-[#eef2ff] text-[#103fd5]" : "text-[#9ca3af] hover:text-[#374151]"}`}
+            className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
+              view === "grid" ? "bg-[#eef2ff] text-[#103fd5]" : "text-[#9ca3af] hover:text-[#374151]"
+            }`}
           >
-            <LayoutGrid size={14} />
+            <LayoutGrid size={13} className="sm:w-[14px] sm:h-[14px]" />
           </button>
           <button
             onClick={() => setView("list")}
-            className={`p-2 rounded-lg transition-colors ${view === "list" ? "bg-[#eef2ff] text-[#103fd5]" : "text-[#9ca3af] hover:text-[#374151]"}`}
+            className={`p-1.5 sm:p-2 rounded-lg transition-colors ${
+              view === "list" ? "bg-[#eef2ff] text-[#103fd5]" : "text-[#9ca3af] hover:text-[#374151]"
+            }`}
           >
-            <List size={14} />
+            <List size={13} className="sm:w-[14px] sm:h-[14px]" />
           </button>
         </div>
       </motion.div>
@@ -377,13 +380,13 @@ export default function AuditPage({ params }: { params: { id: string } }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
-        className="flex items-center justify-between mb-4"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-0 mb-3 sm:mb-4"
       >
         <div>
-          <h2 className="text-[14px] font-semibold text-[#0d1117] tracking-[-0.02em]">
+          <h2 className="text-[13px] sm:text-[14px] font-semibold text-[#0d1117] tracking-[-0.02em]">
             Audit sections
           </h2>
-          <p className="text-[12px] text-[#9ca3af] mt-0.5">
+          <p className="text-[11px] sm:text-[12px] text-[#9ca3af] mt-0.5">
             {filtered.length} section{filtered.length !== 1 ? "s" : ""} &middot; Click any card to expand findings
           </p>
         </div>
@@ -393,7 +396,7 @@ export default function AuditPage({ params }: { params: { id: string } }) {
       <div
         className={
           view === "grid"
-            ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"
             : "flex flex-col gap-3"
         }
       >
@@ -411,12 +414,12 @@ export default function AuditPage({ params }: { params: { id: string } }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-16"
+          className="text-center py-12 sm:py-16"
         >
-          <p className="text-[15px] font-medium text-[#6b7280]">No sections match this filter</p>
+          <p className="text-[14px] sm:text-[15px] font-medium text-[#6b7280]">No sections match this filter</p>
           <button
             onClick={() => setFilter("All")}
-            className="text-[13px] text-[#103fd5] font-medium mt-2 hover:underline"
+            className="text-[12px] sm:text-[13px] text-[#103fd5] font-medium mt-2 hover:underline"
           >
             Clear filter
           </button>

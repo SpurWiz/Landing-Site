@@ -261,18 +261,20 @@ export default function IntegrationsPage() {
   const hasIssues    = integrations.filter(i => i.status === "error" || i.status === "pending").length;
 
   return (
-    <div className="p-6 max-w-[1200px] mx-auto">
+    <div className="p-3 sm:p-4 md:p-6 max-w-[1200px] mx-auto">
 
       {/* ── Page header ── */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="flex items-start justify-between mb-5"
+        className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-0 mb-4 sm:mb-5"
       >
         <div>
-          <h1 className="text-[22px] font-bold text-[#0d1117] tracking-[-0.04em]">Integrations</h1>
-          <p className="text-[13px] text-[#6b7280] mt-0.5">
+          <h1 className="text-[20px] sm:text-[22px] font-bold text-[#0d1117] tracking-[-0.04em]">
+            Integrations
+          </h1>
+          <p className="text-[12px] sm:text-[13px] text-[#6b7280] mt-0.5 truncate max-w-[200px] sm:max-w-none">
             Data sources for{" "}
             <span className="font-semibold text-[#374151]">{activeProject.businessName}</span>
             {" "}· {activeProject.name}
@@ -284,16 +286,18 @@ export default function IntegrationsPage() {
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 text-[12.5px] font-medium"
+            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 text-[11px] sm:text-[12.5px] font-medium shrink-0"
           >
-            <AlertCircle size={13} />
-            {hasIssues} integration{hasIssues > 1 ? "s" : ""} need attention
+            <AlertCircle size={12} className="sm:w-[13px] sm:h-[13px]" />
+            <span className="whitespace-nowrap">
+              {hasIssues} integration{hasIssues > 1 ? "s" : ""} need attention
+            </span>
           </motion.div>
         )}
       </motion.div>
 
       {/* ── Summary stat cards ── */}
-      <div className="grid grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
         {SUMMARY_STATS.map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -312,13 +316,15 @@ export default function IntegrationsPage() {
               </defs>
               <rect width="100%" height="100%" fill={`url(#sp-${i})`} />
             </svg>
-            <div className="relative z-10 px-4 py-4 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+            <div className="relative z-10 px-3 sm:px-4 py-3 sm:py-4 flex items-center gap-2 sm:gap-3">
+              <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center shrink-0"
                 style={{ background: stat.bg }}
               >
-                <span className="text-[16px] font-bold" style={{ color: stat.color }}>{stat.value}</span>
+                <span className="text-[14px] sm:text-[16px] font-bold" style={{ color: stat.color }}>{stat.value}</span>
               </div>
-              <p className="text-[12px] font-medium text-[#374151] leading-tight">{stat.label}</p>
+              <p className="text-[10px] sm:text-[12px] font-medium text-[#374151] leading-tight">
+                {stat.label}
+              </p>
             </div>
           </motion.div>
         ))}
@@ -329,7 +335,7 @@ export default function IntegrationsPage() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, duration: 0.3 }}
-        className="relative rounded-2xl overflow-hidden border border-[#e5e7eb] bg-white mb-5 p-4"
+        className="relative rounded-2xl overflow-hidden border border-[#e5e7eb] bg-white mb-4 sm:mb-5 p-3 sm:p-4"
         style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}
       >
         <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
@@ -338,35 +344,40 @@ export default function IntegrationsPage() {
           </pattern></defs>
           <rect width="100%" height="100%" fill="url(#proj-bar-dots)" />
         </svg>
-        <div className="relative z-10 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+        <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-start sm:items-center gap-3 w-full sm:w-auto">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center shrink-0"
               style={{ background: activeProject.lensGradient }}
             >
-              <Zap size={14} className="text-white" />
+              <Zap size={13} className="sm:w-[14px] sm:h-[14px] text-white" />
             </div>
-            <div>
-              <p className="text-[12.5px] font-semibold text-[#111827]">
+            <div className="min-w-0 flex-1">
+              <p className="text-[11.5px] sm:text-[12.5px] font-semibold text-[#111827] truncate">
                 {connected} source{connected !== 1 ? "s" : ""} feeding into{" "}
                 <span style={{ color: activeProject.lensColor }}>{activeProject.name}</span>
               </p>
-              <p className="text-[11.5px] text-[#9ca3af] mt-0.5">
-                All connected integrations below are scoped to this project only. Switching projects will show different bindings.
+              <p className="text-[10.5px] sm:text-[11.5px] text-[#9ca3af] mt-0.5 line-clamp-1 sm:line-clamp-none">
+                All connected integrations below are scoped to this project only.
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 shrink-0 flex-wrap justify-end">
-            {integrations.filter(i => i.status === "connected").map((int) => {
+          <div className="flex items-center gap-1 sm:gap-1.5 shrink-0 flex-wrap">
+            {integrations.filter(i => i.status === "connected").slice(0, 6).map((int) => {
               const Icon = int.icon;
               return (
                 <div key={int.id}
-                  className="w-7 h-7 rounded-lg flex items-center justify-center border border-[#e5e7eb] bg-white"
+                  className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center border border-[#e5e7eb] bg-white"
                   title={int.name}
                 >
-                  <Icon size={13} style={{ color: int.color }} />
+                  <Icon size={11} className="sm:w-[13px] sm:h-[13px]" style={{ color: int.color }} />
                 </div>
               );
             })}
+            {integrations.filter(i => i.status === "connected").length > 6 && (
+              <span className="text-[10px] text-[#9ca3af] font-medium">
+                +{integrations.filter(i => i.status === "connected").length - 6}
+              </span>
+            )}
           </div>
         </div>
       </motion.div>
@@ -376,21 +387,21 @@ export default function IntegrationsPage() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.18, duration: 0.28 }}
-        className="flex items-center gap-2.5 mb-5 flex-wrap"
+        className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2.5 mb-4 sm:mb-5"
       >
         {/* Search */}
-        <div className="flex items-center gap-2 bg-white border border-[#e5e7eb] rounded-xl px-3 py-2 w-[220px]">
+        <div className="flex items-center gap-2 bg-white border border-[#e5e7eb] rounded-xl px-3 py-1.5 sm:py-2 w-full sm:w-[220px]">
           <Search size={13} className="text-[#9ca3af] shrink-0" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search integrations..."
-            className="text-[12.5px] text-[#374151] placeholder:text-[#9ca3af] outline-none flex-1 bg-transparent"
+            className="text-[11.5px] sm:text-[12.5px] text-[#374151] placeholder:text-[#9ca3af] outline-none flex-1 bg-transparent min-w-0"
           />
         </div>
 
-        {/* Status filter */}
-        <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1">
+        {/* Status filter - horizontal scroll on mobile */}
+        <div className="flex items-center gap-1 bg-white border border-[#e5e7eb] rounded-xl p-1 overflow-x-auto scrollbar-none shrink-0">
           {STATUS_FILTERS.map((f) => {
             const active = statusFilter === f;
             const icons: Record<typeof f, LucideIcon> = {
@@ -402,7 +413,7 @@ export default function IntegrationsPage() {
               <button
                 key={f}
                 onClick={() => setStatusFilter(f)}
-                className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11.5px] font-medium transition-colors"
+                className="relative flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 rounded-lg text-[10.5px] sm:text-[11.5px] font-medium transition-colors whitespace-nowrap"
                 style={{ color: active ? "#103fd5" : "#6b7280" }}
               >
                 {active && (
@@ -412,24 +423,24 @@ export default function IntegrationsPage() {
                     transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
                   />
                 )}
-                <FilterIcon size={11} className="relative z-10" />
+                <FilterIcon size={15} className="sm:w-[11px] sm:h-[11px] relative z-10" />
                 <span className="relative z-10 hidden sm:inline">{f}</span>
               </button>
             );
           })}
         </div>
 
-        {/* Category filter */}
-        <div className="flex items-center gap-1.5 ml-auto flex-wrap">
-          <SlidersHorizontal size={13} className="text-[#9ca3af]" />
-          <div className="flex items-center gap-1 overflow-x-auto">
+        {/* Category filter - horizontal scroll on mobile */}
+        <div className="flex items-center gap-1.5 ml-auto overflow-x-auto scrollbar-none flex-1 sm:flex-initial">
+          <SlidersHorizontal size={12} className="sm:w-[13px] sm:h-[13px] text-[#9ca3af] shrink-0" />
+          <div className="flex flex-wrap items-center gap-1 overflow-x-auto scrollbar-none">
             {CATEGORIES.map((cat) => {
               const active = categoryFilter === cat;
               return (
                 <button
                   key={cat}
                   onClick={() => setCategoryFilter(cat)}
-                  className="px-2.5 py-1 rounded-lg text-[11.5px] font-medium whitespace-nowrap transition-all border"
+                  className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-lg text-[10px] sm:text-[11.5px] font-medium whitespace-nowrap transition-all border shrink-0"
                   style={{
                     background:   active ? activeProject.lensColor       : "white",
                     color:        active ? "white"                        : "#6b7280",
@@ -452,15 +463,15 @@ export default function IntegrationsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="flex items-center gap-2 mb-3"
+            className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3"
           >
-            <CheckCircle2 size={13} className="text-emerald-500" />
-            <h2 className="text-[13px] font-semibold text-[#374151]">Connected</h2>
-            <span className="text-[11px] text-[#9ca3af]">
+            <CheckCircle2 size={12} className="sm:w-[13px] sm:h-[13px] text-emerald-500" />
+            <h2 className="text-[12px] sm:text-[13px] font-semibold text-[#374151]">Connected</h2>
+            <span className="text-[10px] sm:text-[11px] text-[#9ca3af] truncate">
               — pulling data into {activeProject.name}
             </span>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
             {filtered.filter(i => i.status === "connected").map((int, i) => (
               <IntegrationCard
                 key={int.id}
@@ -481,12 +492,12 @@ export default function IntegrationsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.22 }}
-            className="flex items-center gap-2 mb-3"
+            className="flex items-center gap-1.5 sm:gap-2 mb-3"
           >
-            <AlertCircle size={13} className="text-amber-500" />
-            <h2 className="text-[13px] font-semibold text-[#374151]">Needs attention</h2>
+            <AlertCircle size={12} className="sm:w-[13px] sm:h-[13px] text-amber-500" />
+            <h2 className="text-[12px] sm:text-[13px] font-semibold text-[#374151]">Needs attention</h2>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
             {filtered.filter(i => i.status === "error" || i.status === "pending").map((int, i) => (
               <IntegrationCard
                 key={int.id}
@@ -507,13 +518,13 @@ export default function IntegrationsPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.24 }}
-            className="flex items-center gap-2 mb-3"
+            className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-3"
           >
-            <Plug size={13} className="text-[#9ca3af]" />
-            <h2 className="text-[13px] font-semibold text-[#374151]">Available to connect</h2>
-            <span className="text-[11px] text-[#9ca3af]">— not yet linked to this project</span>
+            <Plug size={12} className="sm:w-[13px] sm:h-[13px] text-[#9ca3af]" />
+            <h2 className="text-[12px] sm:text-[13px] font-semibold text-[#374151]">Available to connect</h2>
+            <span className="text-[10px] sm:text-[11px] text-[#9ca3af]">— not yet linked to this project</span>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
             {filtered.filter(i => i.status === "disconnected").map((int, i) => (
               <IntegrationCard
                 key={int.id}
@@ -531,13 +542,13 @@ export default function IntegrationsPage() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-20"
+          className="text-center py-16 sm:py-20"
         >
-          <Plug size={32} className="text-[#d1d5db] mx-auto mb-3" />
-          <p className="text-[15px] font-medium text-[#6b7280]">No integrations match</p>
+          <Plug size={28} className="sm:w-8 sm:h-8 text-[#d1d5db] mx-auto mb-3" />
+          <p className="text-[14px] sm:text-[15px] font-medium text-[#6b7280]">No integrations match</p>
           <button
             onClick={() => { setSearch(""); setCategoryFilter("All"); setStatusFilter("All"); }}
-            className="text-[13px] text-[#103fd5] font-medium mt-2 hover:underline"
+            className="text-[12px] sm:text-[13px] text-[#103fd5] font-medium mt-2 hover:underline"
           >
             Clear filters
           </button>
