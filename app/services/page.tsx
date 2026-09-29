@@ -251,7 +251,7 @@ const ServicesPage = () => {
                 <TbArrowRight size={15} />
               </Link>
               <Link
-                href="/legacy"
+                href="/legacylens"
                 className="inline-flex items-center gap-2 border border-[#fdb62f] text-[#fdb62f] hover:bg-[#fdb62f]/10 text-[14px] font-bold px-6 py-3 rounded-full transition-all duration-200"
               >
                 <HiSparkles size={14} />

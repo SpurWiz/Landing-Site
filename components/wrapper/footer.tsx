@@ -106,11 +106,11 @@ const Footer = () => {
           </h4>
           <div className="space-y-3">
             <Link
-              href="mailto:contact@spurwiz.com"
+              href="mailto:support@spurwiz.com"
               className="flex items-center gap-2.5 text-[#6b7280] text-[13.5px] hover:text-[#103FD5] transition-colors group"
             >
               <TbMail size={14} className="text-[#fdb62f] flex-shrink-0" />
-              contact@spurwiz.com
+              support@spurwiz.com
             </Link>
             <Link
               href="tel:+2349040460390"

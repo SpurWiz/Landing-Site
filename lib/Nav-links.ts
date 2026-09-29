@@ -3,5 +3,5 @@ export const navLinks = [
   { id: 2, href: "/legacylens", name: "legacy lens" },
   { id: 3, href: "/grow", name: "grow" },
   { id: 4, href: "services", name: "Services" },
-  { id: 5, href: "/career", name: "career" },
+  // { id: 5, href: "/career", name: "career" },
 ];

@@ -2,79 +2,114 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navLinks } from "@/lib/Nav-links";
-import { GoArrowUpRight } from "react-icons/go";
-import { HiMenuAlt3 } from "react-icons/hi";
-import { HiSparkles } from "react-icons/hi2";
-import { X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Button from "@/components/ui/Button";
+
+// The logo already links home, so "home" is left out of the bar.
+const links = navLinks.filter((link) => link.href !== "/");
 
 const Header = () => {
-  const [navOpen, setNavOpen] = useState(false);
-  const pathName = usePathname();
-  // console.log(pathName);
-  function handleNav() {
-    setNavOpen((cur) => !cur);
-  }
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close the mobile menu whenever the page changes
+  useEffect(() => setOpen(false), [pathname]);
+
   return (
-    <header className="py-8 sticky z-100 top-0 bg-[#F9F9F9]">
-      <div className="container mx-auto px-6">
-        <nav className="md:grid md:grid-cols-3 flex justify-between items-center">
-          <div className="logo md:col-span-1">
-            <Link href="/" className="relative w-32 h-10 block">
-              <Image
-                src="/logo/icon.png"
-                alt="logo"
-                fill
-                sizes=""
-                className="object-contain w-32"
-              />
-            </Link>
-          </div>
-          <div
-            className={`nav-links_buttons absolute md:static px-6 md:px-0 flex md:flex-row flex-col items-center justify-center md:justify-between space-y-30 md:space-y-0 md:col-span-2 w-full bg-[#F9F9F9] left-0 top-full h-[90vh] -z-50 md:z-0 md:h-fit md:opacity-100 md:translate-y-0 transition-all duration-300 ease-in-out ${navOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}
-          >
-            <ul className="nav-links flex md:flex-row flex-col items-center justify-center space-y-10 md:space-y-0 md:space-x-8 md:flex-1">
-              {navLinks.map((link) => {
-                return (
-                  <Link
-                    key={link.id}
-                    href={link.href}
-                    className={`capitalize font-normal leading-4 tracking-[-2%] pb-0.5 hover:text-[var(--accent-500)] hover:border-b-2 hover:border-b-[var(--accent-500)] transition-all duration-300 ease-in-out ${pathName === link.href ? "text-accent border-b-2 border-b-[var(--accent-500)]" : "text-gray-400"}`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </ul>
-            <div className="work-with-us-btn md:flex-1 flex flex-col md:flex-row space-y-3 md:space-y-0 md:items-center justify-end w-full md:w-fit">
+    <header className="sticky top-0 z-50 border-b border-[#e5e7eb] bg-white/90 backdrop-blur">
+      <div className="container mx-auto flex h-[72px] items-center justify-between px-4 md:px-6">
+        {/* Logo + wordmark */}
+        <Link href="/" className="flex items-center gap-2.5" aria-label="SpurWiz home">
+          <span className="relative block h-9 w-9 shrink-0">
+            <Image
+              src="/logo/icon.png"
+              alt=""
+              fill
+              sizes="36px"
+              className="object-contain"
+              priority
+            />
+          </span>
+          <span className="text-[22px] font-extrabold leading-none mt-3 tracking-[-0.03em] text-[#0d0d0d]">
+            Spur<span className="text-[#103FD5]">Wiz</span>
+          </span>
+        </Link>
+
+        {/* Desktop links */}
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+          {links.map((link) => {
+            const active = pathname === link.href;
+            return (
               <Link
-                href="/"
-                className="capitalize md:py-2.5 md:px-3.5 py-4.5 px-6.5 text-[15px] leading-4 tracking-[-2%] font-bold flex gap-1 items-center justify-center md:w-fit w-full border rounded-[40px] md:border-[var(--accent-500)]] md:text-accent bg-[#103FD5] text-white md:bg-transparent"
+                key={link.id}
+                href={link.href}
+                className={`text-[15px] font-semibold capitalize transition-colors ${
+                  active ? "text-[#103FD5]" : "text-[#374151] hover:text-[#103FD5]"
+                }`}
               >
-                <span>work with us</span>
-                <span>
-                  <GoArrowUpRight />
-                </span>
+                {link.name}
               </Link>
-              <Link
-                href="/"
-                className="capitalize py-4.5 px-6.5 text-[15px] leading-4 tracking-[-2%] font-bold flex gap-1 items-center justify-center md:w-fit w-full border rounded-[40px] border-[var(--accent-500)] text-accent md:hidden"
-              >
-                <span>
-                  <HiSparkles />
-                </span>
-                <span>try legacy lens</span>
-              </Link>
-            </div>
-          </div>
-          <div className="hamburger md:hidden">
-            <button onClick={handleNav} className="text-gray-700">
-              {navOpen ? <X /> : <HiMenuAlt3 size={24} />}
-            </button>
-          </div>
+            );
+          })}
         </nav>
+
+        {/* Desktop CTA */}
+        <div className="hidden md:block">
+          <Button
+            label="Work With Us"
+            href="/contact"
+            variant="primary"
+            size="md"
+            icon="arrow"
+            iconPosition="right"
+          />
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="text-[#374151] md:hidden"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+        >
+          {open ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {open && (
+        <div className="border-t border-[#e5e7eb] bg-white px-4 pb-6 pt-2 md:hidden">
+          <nav className="flex flex-col" aria-label="Mobile">
+            {links.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.id}
+                  href={link.href}
+                  className={`border-b border-[#f3f4f6] py-4 text-[16px] font-semibold capitalize ${
+                    active ? "text-[#103FD5]" : "text-[#374151]"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </nav>
+          <div className="mt-5">
+            <Button
+              label="Work With Us"
+              href="/contact"
+              variant="primary"
+              size="lg"
+              icon="arrow"
+              iconPosition="right"
+              fullWidth
+            />
+          </div>
+        </div>
+      )}
     </header>
   );
 };

@@ -2,16 +2,15 @@
 import Wrapper from "@/components/wrapper";
 import React, { useState } from "react";
 import Link from "next/link";
-import { HiSparkles } from "react-icons/hi2";
 import {
   TbMail,
+  TbPhone,
   TbMapPin,
   TbBrandX,
   TbBrandInstagram,
   TbBrandLinkedin,
   TbArrowRight,
   TbCheck,
-  TbPhone,
 } from "react-icons/tb";
 
 const enquiryTypes = [
@@ -22,6 +21,35 @@ const enquiryTypes = [
   "Career or internship application",
   "General question",
 ];
+const details = [
+  {
+    icon: <TbMail size={18} />,
+    label: "Email",
+    value: "contact@spurwiz.com",
+    href: "mailto:contact@spurwiz.com",
+  },
+  {
+    icon: <TbPhone size={18} />,
+    label: "Phone",
+    value: "+234 904 0460 390",
+    href: "tel:+2349040460390",
+  },
+  {
+    icon: <TbMapPin size={18} />,
+    label: "Office",
+    value: "Abuja, Nigeria",
+  },
+];
+
+const socials = [
+  { icon: <TbBrandX size={18} />, label: "X", href: "https://www.x.com/spurwiz" },
+  { icon: <TbBrandInstagram size={18} />, label: "Instagram", href: "https://www.instagram.com/spurwiz" },
+  { icon: <TbBrandLinkedin size={18} />, label: "LinkedIn", href: "https://www.linkedin.com/company/officialsdgltd" },
+];
+
+// One shared style for every input, select and textarea
+const fieldClass =
+  "w-full rounded-xl border border-[#e5e7eb] bg-white px-4 py-3 text-[15px] text-[#111827] outline-none transition placeholder:text-[#9ca3af] focus:border-[#103FD5]/50 focus:ring-2 focus:ring-[#103FD5]/10";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -46,238 +74,179 @@ export default function ContactPage() {
 
   return (
     <Wrapper>
-      {/* ── Hero ── */}
-      <section className="bg-[#F9F9F9] pt-10 pb-14">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <span className="inline-flex items-center gap-1.5 bg-[#fdb62f]/15 text-[#b07d00] text-[11px] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-5">
-            <HiSparkles size={11} />
-            Get In Touch
-          </span>
-          <h1
-            className="font-extrabold leading-[1.08] tracking-[-0.03em] text-[#0d0d0d] mb-4"
-            style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-          >
-            Let's build something{" "}
-            <span className="text-[#103FD5]">that lasts.</span>
-          </h1>
-          <p className="text-[#4b5563] text-[16px] leading-[1.75] max-w-[520px]">
-            Whether you want to work with us, see a LegacyLens demo, or just ask a question —
-            we respond to every message within one business day.
-          </p>
-        </div>
-      </section>
+      <main className="bg-white">
+        <div className="container mx-auto max-w-[720px] px-4 py-16 md:px-6 md:py-24">
+          {/* 1. Title */}
+          <div className="text-center">
+            <h1
+              className="font-extrabold leading-[1.08] tracking-[-0.03em] text-[#0d0d0d]"
+              style={{ fontSize: "clamp(1.25rem, 4vw, 2.5rem)" }}
+            >
+              Let&apos;s build something{" "}
+              <span className="text-[#103FD5]">that lasts.</span>
+            </h1>
+            <p className="mx-auto mt-5 max-w-[520px] text-[16px] leading-[1.7] text-[#4b5563]">
+              Tell us what you&apos;re working on. We reply to every message within one
+              business day.
+            </p>
+          </div>
 
-      {/* ── Main content ── */}
-      <section className="bg-[#F9F9F9] pb-24">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-16">
-
-            {/* ── Left: Contact details ── */}
-            <div className="lg:col-span-1 space-y-8">
-              <div className="space-y-5">
-                <h2 className="font-bold text-[16px] text-[#111827] uppercase tracking-widest text-[12px]">
-                  Our Details
-                </h2>
-
-                <div className="space-y-4">
-                  <ContactDetail
-                    icon={<TbMail size={16} />}
-                    label="Email"
-                    value="contact@spurwiz.com"
-                    href="mailto:contact@spurwiz.com"
-                  />
-                  <ContactDetail
-                    icon={<TbPhone size={16} />}
-                    label="Phone"
-                    value="+234 801 234 5678"
-                    href="tel:+2348012345678"
-                  />
-                  <ContactDetail
-                    icon={<TbMapPin size={16} />}
-                    label="Head Office"
-                    value="Abuja, Federal Capital Territory, Nigeria"
-                  />
+          {/* 2. Form */}
+          <div className="mt-12">
+            {!submitted ? (
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5 rounded-2xl border border-[#e5e7eb] bg-white p-6 shadow-[0_20px_60px_-25px_rgba(16,63,213,0.2)] sm:p-9"
+              >
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <Field label="Full name">
+                    <input
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      required
+                      className={fieldClass}
+                    />
+                  </Field>
+                  <Field label="Email">
+                    <input
+                      name="email"
+                      type="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="you@company.com"
+                      required
+                      className={fieldClass}
+                    />
+                  </Field>
                 </div>
-              </div>
 
-              {/* Hours */}
-              <div className="space-y-3">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-[#9ca3af]">
-                  Office Hours
-                </p>
-                <div className="space-y-1.5 text-[13.5px]">
-                  <div className="flex justify-between text-[#374151]">
-                    <span>Monday – Friday</span>
-                    <span className="text-[#111827] font-semibold">9:00 – 17:00</span>
-                  </div>
-                  <div className="flex justify-between text-[#374151]">
-                    <span>Saturday</span>
-                    <span className="text-[#111827] font-semibold">11:00 – 15:00</span>
-                  </div>
-                  <div className="flex justify-between text-[#374151]">
-                    <span>Sunday</span>
-                    <span className="text-[#9ca3af]">Closed</span>
-                  </div>
-                </div>
-              </div>
+                <Field label="Organisation" optional>
+                  <input
+                    name="organisation"
+                    value={form.organisation}
+                    onChange={handleChange}
+                    placeholder="Your company or organisation"
+                    className={fieldClass}
+                  />
+                </Field>
 
-              {/* Social */}
-              <div className="space-y-3">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-[#9ca3af]">
-                  Follow Us
-                </p>
-                <div className="space-y-2.5">
-                  {[
-                    { icon: <TbBrandX size={16} />, label: "X (Twitter)", handle: "@spurwiz", href: "https://www.x.com/spurwiz" },
-                    { icon: <TbBrandInstagram size={16} />, label: "Instagram", handle: "@spurwiz", href: "https://www.instagram.com/spurwiz" },
-                    { icon: <TbBrandLinkedin size={16} />, label: "LinkedIn", handle: "Spur-Wiz Dynasty Global", href: "https://www.linkedin.com/company/officialsdgltd" },
-                  ].map((s) => (
-                    <Link
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-[#6b7280] hover:text-[#103FD5] transition-colors group"
-                    >
-                      <div className="w-8 h-8 rounded-full border border-[#e5e7eb] bg-white flex items-center justify-center group-hover:border-[#103FD5]/25 transition-colors">
-                        {s.icon}
-                      </div>
-                      <div>
-                        <p className="text-[13px] font-semibold text-[#374151] group-hover:text-[#103FD5] transition-colors">{s.label}</p>
-                        <p className="text-[11px] text-[#9ca3af]">{s.handle}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+                <Field label="Topic">
+                  <select
+                    name="type"
+                    value={form.type}
+                    onChange={handleChange}
+                    required
+                    className={fieldClass}
+                  >
+                    <option value="">Select a topic</option>
+                    {enquiryTypes.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
 
-              {/* LegacyLens CTA */}
-              <div className="bg-[#0d0d0d] rounded-xl p-5 text-white">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-white/40 mb-2">
-                  Quick access
-                </p>
-                <p className="font-bold text-[15px] mb-2">
-                  Join the LegacyLens Waitlist
-                </p>
-                <p className="text-white/55 text-[12.5px] leading-[1.65] mb-4">
-                  Secure your early access slot and founding-tier pricing before our Q2 2026 launch.
-                </p>
-                <Link
-                  href="/waitlist"
-                  className="inline-flex items-center gap-2 bg-[#fdb62f] text-[#0d0d0d] text-[13px] font-bold px-4 py-2 rounded-full hover:bg-[#e6a428] transition-colors"
+                <Field label="Message">
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    rows={5}
+                    placeholder="How can we help?"
+                    required
+                    className={`${fieldClass} resize-y`}
+                  />
+                </Field>
+
+                <button
+                  type="submit"
+                  disabled={!canSubmit}
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#103FD5] px-8 py-3.5 text-[15px] font-bold text-white transition hover:bg-[#0c2fa3] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  <HiSparkles size={13} />
-                  Join Waitlist
-                </Link>
+                  Send message
+                  <TbArrowRight size={16} />
+                </button>
+
+                <p className="text-center text-[12px] text-[#9ca3af]">
+                  By sending this you agree to our{" "}
+                  <Link href="#" className="text-[#103FD5] hover:underline">
+                    Privacy Policy
+                  </Link>
+                  . We handle data in line with the NDPR.
+                </p>
+              </form>
+            ) : (
+              <div className="rounded-2xl border border-[#e5e7eb] bg-white p-10 text-center shadow-[0_20px_60px_-25px_rgba(16,63,213,0.2)]">
+                <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-[#103FD5]/10">
+                  <TbCheck size={26} className="text-[#103FD5]" strokeWidth={2.5} />
+                </div>
+                <h2 className="mb-3 text-[22px] font-bold tracking-tight text-[#111827]">
+                  Message received, {form.name.split(" ")[0]}.
+                </h2>
+                <p className="mx-auto max-w-[380px] text-[15px] leading-[1.7] text-[#6b7280]">
+                  We&apos;ll reply to{" "}
+                  <span className="font-semibold text-[#111827]">{form.email}</span>{" "}
+                  within one business day.
+                </p>
               </div>
-            </div>
+            )}
+          </div>
 
-            {/* ── Right: Form ── */}
-            <div className="lg:col-span-2">
-              {!submitted ? (
-                <div className="bg-white border border-[#e5e7eb] rounded-2xl p-7 sm:p-9">
-                  <div className="mb-7">
-                    <h2 className="font-bold text-[22px] text-[#111827] tracking-tight mb-1.5">
-                      Send us a message
-                    </h2>
-                    <p className="text-[#6b7280] text-[14px]">
-                      Tell us what you're working on. We'll respond within one business day.
-                    </p>
-                  </div>
+          {/* 3. Direct contact */}
+          <div className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {details.map((d) => (
+              <DetailCard key={d.label} {...d} />
+            ))}
+          </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <FormField label="Full name" required>
-                        <input
-                          name="name"
-                          value={form.name}
-                          onChange={handleChange}
-                          placeholder="Your name"
-                          required
-                        />
-                      </FormField>
-                      <FormField label="Email address" required>
-                        <input
-                          name="email"
-                          type="email"
-                          value={form.email}
-                          onChange={handleChange}
-                          placeholder="you@yourorg.com"
-                          required
-                        />
-                      </FormField>
-                    </div>
-
-                    <FormField label="Organisation (optional)">
-                      <input
-                        name="organisation"
-                        value={form.organisation}
-                        onChange={handleChange}
-                        placeholder="Your company or organisation"
-                      />
-                    </FormField>
-
-                    <FormField label="What is this enquiry about?" required>
-                      <select name="type" value={form.type} onChange={handleChange} required>
-                        <option value="">Select an enquiry type</option>
-                        {enquiryTypes.map((t) => (
-                          <option key={t} value={t}>{t}</option>
-                        ))}
-                      </select>
-                    </FormField>
-
-                    <FormField label="Your message" required>
-                      <textarea
-                        name="message"
-                        value={form.message}
-                        onChange={handleChange}
-                        rows={5}
-                        placeholder="Tell us what you're working on, what challenges you're facing, or what questions you have..."
-                        required
-                        style={{ resize: "vertical" }}
-                      />
-                    </FormField>
-
-                    <div className="pt-1">
-                      <p className="text-[12px] text-[#9ca3af] mb-4">
-                        By submitting this form, you agree to our{" "}
-                        <Link href="#" className="text-[#103FD5] hover:underline">Privacy Policy</Link>.
-                        We handle all data in accordance with the NDPR.
-                      </p>
-                      <button
-                        type="submit"
-                        disabled={!canSubmit}
-                        className="inline-flex items-center gap-2 bg-[#103FD5] hover:bg-[#0c2fa3] disabled:opacity-30 disabled:cursor-not-allowed text-white text-[15px] font-bold px-8 py-3.5 rounded-full transition-all duration-200 active:scale-[0.98]"
-                      >
-                        Send Message
-                        <TbArrowRight size={16} />
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              ) : (
-                <div className="bg-white border border-[#e5e7eb] rounded-2xl p-9 text-center animate-in fade-in zoom-in-95 duration-500">
-                  <div className="w-16 h-16 rounded-full bg-[#103FD5]/10 flex items-center justify-center mx-auto mb-6">
-                    <TbCheck size={28} className="text-[#103FD5]" strokeWidth={2.5} />
-                  </div>
-                  <h2 className="font-bold text-[22px] text-[#111827] tracking-tight mb-3">
-                    Message received, {form.name.split(" ")[0]}.
-                  </h2>
-                  <p className="text-[#6b7280] text-[15px] leading-[1.75] max-w-[380px] mx-auto">
-                    We'll review your message and get back to you at{" "}
-                    <span className="text-[#111827] font-semibold">{form.email}</span> within one business day.
-                  </p>
-                </div>
-              )}
+          {/* 4. Social + hours, one quiet line */}
+          <div className="mt-8 flex flex-col items-center justify-between gap-4 text-[13px] text-[#6b7280] sm:flex-row">
+            <p>Mon – Fri, 9:00 – 17:00 · Sat, 11:00 – 15:00</p>
+            <div className="flex items-center gap-2">
+              {socials.map((s) => (
+                <Link
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e5e7eb] text-[#6b7280] transition hover:border-[#103FD5]/30 hover:text-[#103FD5]"
+                >
+                  {s.icon}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
-      </section>
+      </main>
     </Wrapper>
   );
 }
 
-function ContactDetail({
+function Field({
+  label,
+  optional,
+  children,
+}: {
+  label: string;
+  optional?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block text-[13px] font-semibold text-[#374151]">
+        {label}
+        {optional && <span className="ml-1 font-normal text-[#9ca3af]">(optional)</span>}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+function DetailCard({
   icon,
   label,
   value,
@@ -288,43 +257,23 @@ function ContactDetail({
   value: string;
   href?: string;
 }) {
-  const content = (
-    <div className="flex items-start gap-3">
-      <div className="flex-shrink-0 w-8 h-8 rounded-full border border-[#e5e7eb] bg-white flex items-center justify-center text-[#fdb62f] mt-0.5">
+  const inner = (
+    <>
+      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#103FD5]/10 text-[#103FD5]">
         {icon}
-      </div>
-      <div>
-        <p className="text-[11px] text-[#9ca3af] uppercase tracking-wider font-bold">{label}</p>
-        <p className="text-[14px] text-[#374151] font-medium mt-0.5">{value}</p>
-      </div>
-    </div>
+      </span>
+      <span className="mt-3 block text-[12px] font-semibold uppercase tracking-wider text-[#9ca3af]">
+        {label}
+      </span>
+      <span className="mt-0.5 block text-[14px] font-semibold text-[#111827]">{value}</span>
+    </>
   );
+  const cls = "block rounded-xl border border-[#e5e7eb] bg-white p-5 text-left";
   return href ? (
-    <Link href={href} className="block hover:opacity-80 transition-opacity">
-      {content}
+    <Link href={href} className={`${cls} transition hover:border-[#103FD5]/30`}>
+      {inner}
     </Link>
   ) : (
-    <div>{content}</div>
-  );
-}
-
-function FormField({
-  label,
-  required,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <label className="block text-[12px] font-semibold text-[#374151] uppercase tracking-wider mb-1.5">
-        {label} {required && <span className="text-[#103FD5]">*</span>}
-      </label>
-      <div className="[&_input]:w-full [&_input]:bg-[#f9fafb] [&_input]:border [&_input]:border-[#e5e7eb] [&_input]:rounded-xl [&_input]:px-4 [&_input]:py-3 [&_input]:text-[#111827] [&_input]:text-[14px] [&_input]:outline-none [&_input:focus]:border-[#103FD5]/40 [&_input:focus]:ring-2 [&_input:focus]:ring-[#103FD5]/10 [&_input]:placeholder:text-[#9ca3af] [&_input]:transition-all [&_select]:w-full [&_select]:bg-[#f9fafb] [&_select]:border [&_select]:border-[#e5e7eb] [&_select]:rounded-xl [&_select]:px-4 [&_select]:py-3 [&_select]:text-[#111827] [&_select]:text-[14px] [&_select]:outline-none [&_select:focus]:border-[#103FD5]/40 [&_select:focus]:ring-2 [&_select:focus]:ring-[#103FD5]/10 [&_select]:transition-all [&_textarea]:w-full [&_textarea]:bg-[#f9fafb] [&_textarea]:border [&_textarea]:border-[#e5e7eb] [&_textarea]:rounded-xl [&_textarea]:px-4 [&_textarea]:py-3 [&_textarea]:text-[#111827] [&_textarea]:text-[14px] [&_textarea]:outline-none [&_textarea:focus]:border-[#103FD5]/40 [&_textarea:focus]:ring-2 [&_textarea:focus]:ring-[#103FD5]/10 [&_textarea]:placeholder:text-[#9ca3af] [&_textarea]:transition-all">
-        {children}
-      </div>
-    </div>
+    <div className={cls}>{inner}</div>
   );
 }

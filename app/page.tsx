@@ -1,15 +1,14 @@
 import Wrapper from "@/components/wrapper";
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
-import WhyUnderperform from "./files/why-underperform";
-import IntegratedExpertise from "./files/integrated-expertise";
-import ProductPartners from "./files/product-partners";
-import LegacyLensSection from "./files/legacy-lens";
-import BuiltForFounders from "./files/built-for-founders";
-import Testimonials from "./files/testimonials";
-import CtaSection from "./files/cta-section";
+import Hero from "../components/sections/hero";
+import WhyUnderperform from "../components/sections/why-underperform";
+import IntegratedExpertise from "../components/sections/integrated-expertise";
+import ProductPartners from "../components/sections/product-partners";
+import LegacyLensSection from "../components/sections/legacy-lens";
+import BuiltForFounders from "../components/sections/built-for-founders";
+import Testimonials from "../components/sections/testimonials";
+import CtaSection from "../components/sections/cta-section";
 import { HiSparkles } from "react-icons/hi2";
 import { TbArrowRight, TbCheck } from "react-icons/tb";
 import {
@@ -167,72 +166,7 @@ const ServicesOverview = () => {
 const LandingPage = () => {
   return (
     <Wrapper>
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-[#fff8e6] min-h-[calc(100vh-88px)]">
-        <div className="container mx-auto px-3 md:px-6 h-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-center min-h-[calc(100vh-88px)] py-12 lg:py-0">
-            <div className="flex flex-col justify-center space-y-6 relative z-10 max-w-[620px]">
-              {/* Partnership badge */}
-              <span className="inline-flex items-center gap-1.5 self-start bg-[#103FD5]/10 text-[#103FD5] text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-[#103FD5]/15">
-                In partnership with Synergix Africa
-              </span>
-
-              {/* Headline - updated per CTO brief */}
-              <h1
-                className="font-extrabold leading-[1.08] tracking-[-0.03em] text-[#0d0d0d]"
-                style={{ fontSize: "clamp(2.1rem, 3.5vw, 4rem)" }}
-              >
-                We Don't Just Build Businesses.{" "}
-                <span className="text-[#103FD5]">We Build Legacies.</span>
-              </h1>
-
-              {/* Sub-copy */}
-              <p className="text-[#4b5563] text-[15px] leading-[1.7] max-w-[520px]">
-                Spur-Wiz Dynasty Global is Africa's institutional intelligence company, helping organisations measure, understand, and improve their health through our AI-powered LegacyLens platform and hands-on execution consulting.
-              </p>
-
-              {/* CTA Buttons */}
-              <div className="flex md:flex-wrap gap-3 pt-2">
-                <Button
-                  label="Work With Us"
-                  href="/contact"
-                  variant="primary"
-                  size="md"
-                  icon="arrow"
-                  iconPosition="right"
-                />
-                <Button
-                  label="Try LegacyLens"
-                  href="/legacy"
-                  variant="outline"
-                  size="md"
-                  icon="sparkles"
-                  iconPosition="left"
-                />
-              </div>
-            </div>
-
-            {/* ── Right: Hero Image ── */}
-            <div className="relative flex items-end justify-center lg:justify-end h-60 md:h-[480px] lg:h-[calc(100vh-88px)] max-h-[700px]">
-              <div
-                className="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full pointer-events-none"
-                style={{
-                  background: "radial-gradient(ellipse at 60% 70%, rgba(253,182,47,0.13) 0%, transparent 70%)",
-                }}
-              />
-              <div className="relative w-full h-full">
-                <Image
-                  src="/images/heroImage.png"
-                  alt="Business execution specialist"
-                  fill
-                  priority
-                  className="object-cover object-start !w-[500px]"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       {/* ── LegacyLens preview strip ── */}
       <section className="bg-[#F9F9F9] pt-12 border-t border-[#e5e7eb]">

@@ -119,7 +119,7 @@ const LegacyLensSection = () => {
             />
 
             {message.trim() !== "" && (
-              <button onClick={() => router.push(`/legacy/chat?message=${message}`)} className="absolute right-0 bottom-0 mb-1 bg-white text-black p-2 rounded-full">
+              <button onClick={() => router.push(`/legacylens?message=${message}`)} className="absolute right-0 bottom-0 mb-1 bg-white text-black p-2 rounded-full">
                 <ArrowUp size={18} />
               </button>
             )}
